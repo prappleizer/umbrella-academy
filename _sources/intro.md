@@ -1,11 +1,11 @@
-# Welcome to your Jupyter Book
+# Yale Summer Umbrella Academy
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Here you can find resources and materials for research coding as presented through the Yale Summer Umbrella Academy. 
 
-Check out the content pages bundled with this sample book to see more.
+
 
 ```{tableofcontents}
 ```
+
+
+Copyright 2023 Imad Pasha.
