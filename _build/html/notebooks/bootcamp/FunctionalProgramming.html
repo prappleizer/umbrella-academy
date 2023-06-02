@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Functional Programming: Maximizing the Efficacy of Python Functions &#8212; Yale Umbrella Academy Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bootcamp/FunctionalProgramming';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Environments" href="Environments.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">A Crash Course in Scientific Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Environments.html">Environments</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Functional Programming: Maximizing the Efficacy of Python Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/prappleizer/umbrella-academy" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/prappleizer/umbrella-academy/issues/new?title=Issue%20on%20page%20%2Fnotebooks/bootcamp/FunctionalProgramming.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/bootcamp/FunctionalProgramming.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Functional Programming: Maximizing the Efficacy of Python Functions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-and-type-hinting">Documentation and Type Hinting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-allowed-types">Multiple Allowed Types</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="functional-programming-maximizing-the-efficacy-of-python-functions">
+<h1>Functional Programming: Maximizing the Efficacy of Python Functions<a class="headerlink" href="#functional-programming-maximizing-the-efficacy-of-python-functions" title="Permalink to this heading">#</a></h1>
+<p>In this workbook, we’ll take our knowledge of python functions to the next level. In particular, we’ll talk about</p>
+<ul class="simple">
+<li><p>Type hinting function definitions and properly documenting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*args</span></code> and <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> (along with packing and unpacking function arguments)</p></li>
+<li><p>Unit testing</p></li>
+</ul>
+<section id="documentation-and-type-hinting">
+<h2>Documentation and Type Hinting<a class="headerlink" href="#documentation-and-type-hinting" title="Permalink to this heading">#</a></h2>
+<p>A typical Python function we are used to writing may look something like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">centroid_2D</span><span class="p">(</span><span class="n">pixels</span><span class="p">,</span><span class="n">x_loc</span><span class="p">,</span><span class="n">y_loc</span><span class="p">,</span><span class="n">x_win</span><span class="p">,</span><span class="n">y_win</span><span class="p">):</span>
+    <span class="n">x_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_loc</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span><span class="n">x_loc</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)))</span> 
+    <span class="n">y_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_loc</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span><span class="n">y_loc</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_window</span><span class="p">,</span><span class="n">y_window</span><span class="p">)</span>
+    <span class="n">crop</span><span class="o">=</span><span class="n">pixels</span><span class="p">[</span><span class="n">y_loc</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span><span class="n">y_loc</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span><span class="n">x_loc</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span><span class="n">x_loc</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x_win</span><span class="o">/</span><span class="mi">2</span><span class="p">))]</span>
+    <span class="n">x_cen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crop</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crop</span><span class="p">)</span> 
+    <span class="n">y_cen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crop</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crop</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">x_cen</span><span class="p">,</span><span class="n">y_cen</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see what our function does by creating some fake data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.modeling.functional_models</span> <span class="kn">import</span> <span class="n">Gaussian2D</span>
+<span class="k">def</span> <span class="nf">eval_gauss</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span><span class="n">y_arr</span><span class="p">,</span><span class="n">sigma_x</span><span class="p">,</span><span class="n">sigma_y</span><span class="p">,</span><span class="n">mu_x</span><span class="p">,</span><span class="n">mu_y</span><span class="p">):</span>
+    
+    <span class="n">g</span> <span class="o">=</span> <span class="n">Gaussian2D</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_arr</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_arr</span><span class="p">,</span><span class="n">amplitude</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">theta</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">x_mean</span><span class="o">=</span><span class="n">mu_x</span><span class="p">,</span>
+                   <span class="n">y_mean</span><span class="o">=</span><span class="n">mu_y</span><span class="p">,</span>
+                   <span class="n">x_stddev</span><span class="o">=</span><span class="n">sigma_x</span><span class="p">,</span>
+                   <span class="n">y_stddev</span><span class="o">=</span><span class="n">sigma_y</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">/=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">g</span>
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">eval_gauss</span><span class="p">(</span><span class="n">x_arr</span><span class="o">=</span><span class="n">xx</span><span class="p">,</span><span class="n">y_arr</span><span class="o">=</span><span class="n">yy</span><span class="p">,</span><span class="n">sigma_x</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">sigma_y</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">mu_x</span><span class="o">=</span><span class="mf">9.75</span><span class="p">,</span><span class="n">mu_y</span><span class="o">=</span><span class="mf">10.75</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f7e68b81f00&gt;
+</pre></div>
+</div>
+<img alt="../../_images/c14d56680e7f2072bb99e19b25bc5738ae74106320e9eda517f28fc75bfa3004.png" src="../../_images/c14d56680e7f2072bb99e19b25bc5738ae74106320e9eda517f28fc75bfa3004.png" />
+</div>
+</div>
+<p>Above I have created a 2D gaussian, which might be a reasonable approximation of some star or source we wish to centroid. Let’s run our function on it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_cen</span><span class="p">,</span> <span class="n">y_cen</span> <span class="o">=</span> <span class="n">centroid_2D</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">x_loc</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">y_loc</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span><span class="n">x_win</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">y_win</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_cen</span><span class="p">,</span><span class="n">y_cen</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.658314583634262 10.658314583634263
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plotting over our data (and comparing the values to what we entered in), this seems to have done a good job locating the center!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y_cen</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x_cen</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f7e699a4be0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/9c3b258cbc7d4729c4f0ea87070c64562ef9b79abcbb220ff384a69e1541b535.png" src="../../_images/9c3b258cbc7d4729c4f0ea87070c64562ef9b79abcbb220ff384a69e1541b535.png" />
+</div>
+</div>
+<p>Okay, all of that was an aside, because the focus here is on type hinting.</p>
+<p>Looking at our function again, it might not be clear to us exactly what the functional arguments are asking for, or how they are being used. We can help add clarity here via some docstrings and type hints:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">centroid_2D</span><span class="p">(</span><span class="n">pixels</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+                <span class="n">x_loc</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+                <span class="n">y_loc</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+                <span class="n">x_win</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">y_win</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to calculate the 2D centroid of a pixel distribution. </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pixels: np.array_like</span>
+<span class="sd">        the image to centroid, containing some peaked source.</span>
+<span class="sd">    x_loc: int</span>
+<span class="sd">        Approximate x-location of the peak (i.e., a peak pixel). </span>
+<span class="sd">    y_loc: int</span>
+<span class="sd">        Approximate y-location of the peak. </span>
+<span class="sd">    x_win: int, optional</span>
+<span class="sd">        Window size to use when centroiding x. If None, will use the full input image width, default None.</span>
+<span class="sd">    y_win: int, optional</span>
+<span class="sd">        Window size to use when centroiding y. If None, will use the full input image height, default None.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x_cen,y_cen -&gt; np.float, np.float</span>
+<span class="sd">        the x and y centroid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">x_win</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x_win</span> <span class="o">=</span> <span class="n">pixels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">y_win</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">y_win</span> <span class="o">=</span> <span class="n">pixels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_loc</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span><span class="n">x_loc</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)))</span> 
+    <span class="n">y_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_loc</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span><span class="n">y_loc</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_window</span><span class="p">,</span><span class="n">y_window</span><span class="p">)</span>
+    <span class="n">crop</span><span class="o">=</span><span class="n">pixels</span><span class="p">[</span><span class="n">y_loc</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span><span class="n">y_loc</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span><span class="n">x_loc</span><span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x_win</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span><span class="n">x_loc</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x_win</span><span class="o">/</span><span class="mi">2</span><span class="p">))]</span>
+    <span class="n">x_cen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crop</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crop</span><span class="p">)</span> 
+    <span class="n">y_cen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crop</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">crop</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">x_cen</span><span class="p">,</span><span class="n">y_cen</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Several things about our function have improved in this iteration. First, we have added <em>type hinting</em> to the function arguments. By adding colons and the expexted data type of that variable, we clue the user (including ourselves, later) in to what types of input this function needs. For example, it is useful to know that <code class="docutils literal notranslate"><span class="pre">x_loc</span></code> and <code class="docutils literal notranslate"><span class="pre">y_loc</span></code> must be integer inputs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Quick Exercise
+Why will the above function fail if a non integer is input for <code class="docutils literal notranslate"><span class="pre">x_loc</span></code>?</p>
+</div>
+<p>Additionally, we have utilized the use of <em>optional</em> keyword arguments, which both have type hints <em>and</em> default values. If you look inside the function, the first few lines now handle what happens when these values are <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+And finally, we have added properly formatted documentation, which defines the parameters of the function, descriptions of them, and describes what the function outputs. This lets us now run, e.g., the <code class="docutils literal notranslate"><span class="pre">help()</span></code> function on it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">centroid_2D</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on function centroid_2D in module __main__:
+
+centroid_2D(pixels: &lt;built-in function array&gt;, x_loc: int, y_loc: int, x_win: int = None, y_win: int = None)
+    Function to calculate the 2D centroid of a pixel distribution. 
+    
+    Parameters
+    ----------
+    pixels: np.array_like
+        the image to centroid, containing some peaked source.
+    x_loc: int
+        Approximate x-location of the peak (i.e., a peak pixel). 
+    y_loc: int
+        Approximate y-location of the peak. 
+    x_win: int, optional
+        Window size to use when centroiding x. If None, will use the full input image width, default None.
+    y_win: int, optional
+        Window size to use when centroiding y. If None, will use the full input image height, default None.
+    
+    Returns
+    -------
+    x_cen,y_cen -&gt; np.float, np.float
+        the x and y centroid
+</pre></div>
+</div>
+</div>
+</div>
+<p>Additionally, if you are using a fully featured editor like <code class="docutils literal notranslate"><span class="pre">VSCode</span></code>, when you type out this function, or hover over its name, the type hints for the inputs will pop up on screen, making it easy to ensure you are using a function as intended.</p>
+<section id="multiple-allowed-types">
+<h3>Multiple Allowed Types<a class="headerlink" href="#multiple-allowed-types" title="Permalink to this heading">#</a></h3>
+<p>What if our function can handle both, e.g., a python list <em>or</em> a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array? For that, we can import the <code class="docutils literal notranslate"><span class="pre">typing</span></code> library and utilize the <code class="docutils literal notranslate"><span class="pre">Union</span></code> operator:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span> 
+
+<span class="k">def</span> <span class="nf">my_func</span><span class="p">(</span><span class="n">input_var</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">]):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Union</span></code> operator, attached to the allowed types, says “the input must be a list OR a numpy array”.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that Python, by default, does not check or confirm that inputs to a function match the types listed in the type hinting. However, there are external packages, like <code class="docutils literal notranslate"><span class="pre">mypy</span></code>, that can carry out such an assertion.</p>
+</div>
+<p>If we have a common combination of inputs allowed, we can also define a custom type for them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">astropy</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="n">keyed_data</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span><span class="nb">dict</span><span class="p">,</span><span class="n">astropy</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">Table</span><span class="p">,</span><span class="n">numpy</span><span class="o">.</span><span class="n">recarray</span><span class="p">]</span> 
+
+<span class="k">def</span> <span class="nf">my_func</span><span class="p">(</span><span class="n">input_var</span><span class="p">:</span> <span class="n">keyed_data</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, we have defined <code class="docutils literal notranslate"><span class="pre">keyed_data</span></code> as the union of these several different data storage types which allow access-by-attribute (dict-like access). We then use this in our function definition.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/bootcamp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Environments.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Environments</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-and-type-hinting">Documentation and Type Hinting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-allowed-types">Multiple Allowed Types</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Imad Pasha
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
