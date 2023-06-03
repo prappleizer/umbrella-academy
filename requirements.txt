@@ -1,3 +1,5 @@
+jupyterlab
+jupyterlab_myst
 jupyter-book
 matplotlib
 numpy
