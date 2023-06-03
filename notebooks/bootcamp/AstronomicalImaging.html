@@ -1,0 +1,873 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Astronomical Imaging and FITS &#8212; Yale Umbrella Academy Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bootcamp/AstronomicalImaging';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Functional Programming: Maximizing the Efficacy of Python Functions" href="FunctionalProgramming.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Yale Summer Umbrella Academy: A Crash Course in Scientific Computing
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Python Installation and Setup for Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_1.html">A Day One Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_2.html">A Day 2 Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionalProgramming.html">Functional Programming: Maximizing the Efficacy of Python Functions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Astronomical Imaging and FITS</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/prappleizer/umbrella-academy" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/prappleizer/umbrella-academy/issues/new?title=Issue%20on%20page%20%2Fnotebooks/bootcamp/AstronomicalImaging.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/bootcamp/AstronomicalImaging.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Astronomical Imaging and FITS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Astronomical Imaging and FITS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-an-image">What’s in an image</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#image-handling-with-astropy">Image Handling with Astropy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-the-image">Opening the Image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-preview">Lab Preview</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-astronomical-images">Lab: Astronomical Images</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cutouts">Cutouts</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="astronomical-imaging-and-fits">
+<h1>Astronomical Imaging and FITS<a class="headerlink" href="#astronomical-imaging-and-fits" title="Permalink to this heading">#</a></h1>
+<p><em>Gather round, for I shall tell a tale old as time.
+Long, long ago, astronomers gazed at the heavens, and with naught but their eyes, recorded the positions of the stars they saw there.
+Then, with the telescope, long, heavy contraptions which reached for the skies like an outstretched arm, (thanks, f/20 focal lengths)
+they gazed through eyepieces in freezing domes, falling, on occasion, to their deaths from cages suspended at prime foci.</em></p>
+<p><em>Next came glass – emulsion plates – which upon extended exposure revealed upon their ghostly frames the splotches of stars and soon, galaxies and nebulae.
+Many a grad student, of course, spent their nights twiddling thumbs over micrometer dials to keep these stars in place. Manual guiding… this story teller shudders to imagine it.
+And yet, even then, with permanent record, no measure could be made that weren’t ‘tween the eyes of an observer, peering at the glass through magnifying eyepiece, assigning grades of brightness and, amazingly, pretty much nailing the spectral classification of stars by their absorption features</em>.</p>
+<p><em>And after this painstaking work, came the earliest CCDs, fractured by detector failures, riddled with readout noise, consumed by cosmic ray hits, laid low by low quantum efficiencies.</em></p>
+<p><em>Now… we use Python.</em></p>
+<section id="what-s-in-an-image">
+<h2>What’s in an image<a class="headerlink" href="#what-s-in-an-image" title="Permalink to this heading">#</a></h2>
+<p>Astronomical images differ from standard images taken with a phone or DSLR camera primarily in that they both use older CCD technology and are typically “black and white”, recording only intensity of light and not color.</p>
+<p>Knowledge about color instead comes from the placement of <strong>filters</strong> in front of the detectors which have a certain <strong>bandpass</strong>, allowing through light within a certain wavelength range and blocking light outside it.</p>
+<p>Thus, we only ever get one color at a time, unless the telescope splits incoming light by color using, for example, a <strong>dichroic</strong>, and then sends the two streams to two detectors with different filters simultaneously.</p>
+<p>This means that in some sense, single-band (i.e., one narrow-ish wavelength range) images are simple programmatically: They are 2D arrays in which each pixel (position in array) contains a single number: counts (in some units).</p>
+<p>Usually, these units are counts in ADU (analog-to-digital units), which are roughly related to the actual counts of photons hitting the detector, via properties such as the gain of the system.</p>
+<p>Generally, we are not concerned with the exact units/gain/etc., because we back out the flux in photons (or energy, rather) via empirical calibrations with objects in the sky of known flux. Sometimes, we are given images that have already been flux calibrated, in which case measurements of, say, counts in an aperture are real flux units.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="image-handling-with-astropy">
+<h1>Image Handling with Astropy<a class="headerlink" href="#image-handling-with-astropy" title="Permalink to this heading">#</a></h1>
+<p>Lastly, we need to know how to work with astronomical images in Python. As “simple” 2D arrays, simply opening and plotting an image is easy. But keeping track of, say, the celestial coordinates associated with a pointing on the sky, is not.</p>
+<p>Luckily, the open-source <code class="docutils literal notranslate"><span class="pre">astropy</span></code> library has many tools that facilitate the streamlined handling of astronomical imaging.</p>
+<section id="opening-the-image">
+<h2>Opening the Image<a class="headerlink" href="#opening-the-image" title="Permalink to this heading">#</a></h2>
+<p>Opening images using astropy is made easy using the <code class="docutils literal notranslate"><span class="pre">fits</span></code> file handler. We’ll use a context manager to read in an image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span> 
+
+<span class="k">with</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;antenna_Rband.fits&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">hdu</span><span class="p">:</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">hdu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A <em>context manager</em> is a useful tool for properly managing external resources in your programs. In this case, the external resource is a FITS file. When <em>opening</em> almost any file directly in Python, we also want to <em>close</em> our connection to that file once we have pulled out the data we need. A context manager, using python’s <code class="docutils literal notranslate"><span class="pre">with</span></code> above, will automatically close our fits file once extracting the header and image.</p>
+</div>
+<p>We can confirm we’ve loaded a 2D array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 4.8691406,  5.432617 ,  5.713867 , ..., 11.48584  , 11.48584  ,
+        11.48584  ],
+       [ 5.573242 ,  5.713867 ,  5.291504 , ..., 11.48584  , 11.48584  ,
+        11.48584  ],
+       [ 6.4179688,  5.573242 ,  5.573242 , ..., 11.48584  , 11.48584  ,
+        11.48584  ],
+       ...,
+       [11.48584  , 11.48584  , 11.48584  , ...,  6.2768555,  5.432617 ,
+         5.9956055],
+       [11.48584  , 11.48584  , 11.48584  , ...,  5.291504 ,  5.432617 ,
+         5.573242 ],
+       [11.48584  , 11.48584  , 11.48584  , ...,  5.291504 ,  4.8691406,
+         3.4614258]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can make a basic plot showing it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fcfd9379bb0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/b1a261c1097346be5df115856199f4c26f97e3a385d9df99aec7485c24ffbebc.png" src="../../_images/b1a261c1097346be5df115856199f4c26f97e3a385d9df99aec7485c24ffbebc.png" />
+</div>
+</div>
+<p>That may not have looked like much, but it did at least confirm we have a 2D image. Let’s tweak some settings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">5</span><span class="o">*</span><span class="n">s</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/851cbc28cc939939ab5a196c9524b8897913bb23a35217b8144b4e287fcfc2ef.png" src="../../_images/851cbc28cc939939ab5a196c9524b8897913bb23a35217b8144b4e287fcfc2ef.png" />
+</div>
+</div>
+<p>Next, we need to plot with our <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes representing sky coordinate (RA/DEC) rather than pixel position. For this, we’ll need to use <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s <code class="docutils literal notranslate"><span class="pre">World</span> <span class="pre">Coordinate</span> <span class="pre">System</span></code> module. There are several defined coordinate systems on the sky, but for this class, we’ll primarily be using RA and DEC. (i.e., equitorial coordinates measured in hour angles and degrees).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span> 
+
+<span class="n">wcs_im</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO: 
+                Inconsistent SIP distortion information is present in the FITS header and the WCS object:
+                SIP coefficients were detected, but CTYPE is missing a &quot;-SIP&quot; suffix.
+                astropy.wcs is using the SIP distortion coefficients,
+                therefore the coordinates calculated here might be incorrect.
+
+                If you do not want to apply the SIP distortion coefficients,
+                please remove the SIP coefficients from the FITS header or the
+                WCS object.  As an example, if the image is already distortion-corrected
+                (e.g., drizzled) then distortion components should not apply and the SIP
+                coefficients should be removed.
+
+                While the SIP distortion coefficients are being applied here, if that was indeed the intent,
+                for consistency please append &quot;-SIP&quot; to the CTYPE in the FITS header or the WCS object.
+
+                 [astropy.wcs.wcs]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: FITSFixedWarning: &#39;datfix&#39; made the change &#39;Set MJD-OBS to 53207.000000 from DATE-OBS&#39;. [astropy.wcs.wcs]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The wcs for a given image is constructed from the image header, where some information about the pixel scale and image pointing are stored. Notice here we got a warning. This happens sometimes with <em>HST</em> images that are mosaics of pointings that have already been drizzled (an image alignment/combination process). We need to remove the mentioned coefficients.</p>
+<p>The following will be provided for lab:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">strip_SIP</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
+    <span class="n">A_prefixes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;A_&#39;</span><span class="p">)]</span>
+    <span class="n">B_prefixes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;B_&#39;</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A_prefixes</span><span class="p">,</span><span class="n">B_prefixes</span><span class="p">):</span>
+        <span class="k">del</span> <span class="n">header</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">header</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">header</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">header_fixed</span> <span class="o">=</span> <span class="n">strip_SIP</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+<span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">header_fixed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are now ready to plot our image in celestial coordinates. Our game plan is to use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>’s <code class="docutils literal notranslate"><span class="pre">projection</span></code>. You may be familiar with this as the way to make an axis, e.g., in polar coordinates. <code class="docutils literal notranslate"><span class="pre">Astropy</span></code> <code class="docutils literal notranslate"><span class="pre">WCS</span></code> objects can be treated as projections in <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. Below I show two ways to initialize an axis with our new wcs projection.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span><span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;projection&#39;</span><span class="p">:</span><span class="n">wcs</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9266921567c52b17a9df532a6311d1d9be046e469bda99cb37cf9376235869cf.png" src="../../_images/9266921567c52b17a9df532a6311d1d9be046e469bda99cb37cf9376235869cf.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">wcs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9266921567c52b17a9df532a6311d1d9be046e469bda99cb37cf9376235869cf.png" src="../../_images/9266921567c52b17a9df532a6311d1d9be046e469bda99cb37cf9376235869cf.png" />
+</div>
+</div>
+<p>The two methods work equally well. The former is slightly preferred, as it makes it easy to make multiple panels with a wcs projection.</p>
+<p>Now, all we have to do, is plop our image into it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span><span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;projection&#39;</span><span class="p">:</span><span class="n">wcs</span><span class="p">})</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">5</span><span class="o">*</span><span class="n">s</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d2cf7c59dfa8029104e0f20301c78dcbbd544b21dc79c1cff1e3b8f003cd652b.png" src="../../_images/d2cf7c59dfa8029104e0f20301c78dcbbd544b21dc79c1cff1e3b8f003cd652b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;WCSAxesSubplot:xlabel=&#39;pos.eq.ra&#39;, ylabel=&#39;pos.eq.dec&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="lab-preview">
+<h3>Lab Preview<a class="headerlink" href="#lab-preview" title="Permalink to this heading">#</a></h3>
+<p>In this lab, you’ll be working with the same image of the Antenna galaxy, in several bands. In addition to the basic reading in and use of header/wcs, you’ll be learning about <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>, the <code class="docutils literal notranslate"><span class="pre">astropy</span></code> handler for coordinates, and <code class="docutils literal notranslate"><span class="pre">units</span></code> which is a module we’ll be discussing throughout class. You’ll use <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code> to make zoom in plots of the image while retaining coordinate information. And you’ll use the <code class="docutils literal notranslate"><span class="pre">photutils</span></code> package and <code class="docutils literal notranslate"><span class="pre">sep</span></code> to find sources and perform some aperture photometry.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="lab-astronomical-images">
+<h1>Lab: Astronomical Images<a class="headerlink" href="#lab-astronomical-images" title="Permalink to this heading">#</a></h1>
+<p>Astronomical images are one of the basic building blocks of astronomical research. While we now obtain data in myriad ways, from gravitational waves to neutrinos, from spectra to polarimetry, the basic tenant of astronomy (and it’s most recongizable public impact) is the images we make of the sky.</p>
+<p>That is why the first science topic we’ll be tackling is imaging. And along the way, we’ll learn how <code class="docutils literal notranslate"><span class="pre">astropy</span></code> makes our lives <em>so</em> much easier when dealing with images, and how to use robust functions to perform the analyses one might want to carry out on images (after we’re done admiring their beauty).</p>
+<p>Many of you are probably familiar with the <code class="docutils literal notranslate"><span class="pre">FITS</span></code> standard. It stands for <code class="docutils literal notranslate"><span class="pre">Flexible</span> <span class="pre">Image</span> <span class="pre">Transport</span> <span class="pre">System</span></code>, and for all intents and purposes, it acts as a container (much like a zip file). Within it, one can store several kinds of information: images (2d arrays of values), as the name implies, headers (dictionary like objects with metadata), and sometimes tabular data as well. A <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file can contain any number of <em>extensions</em>, which just refer to “slots” where stuff is stored. Every “slot” has a <code class="docutils literal notranslate"><span class="pre">header</span></code> attribute and a <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute. Thus, you could store a hundred astronomical images in 1 file, each with a different extension and a different header describing the image in that slot.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Contextual clues are important when dealing with <code class="docutils literal notranslate"><span class="pre">FITS</span></code> files. Files that are explicitly single images almost always have the image stored in the 0th extension, while files that are explicitly table data tend to have the table stored in the 1st extension (with the 0th empty).</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">FITS</span></code> standard is pretty old, and may be retired soon, but almost all ground based telescopes still use it for their native image output, so it behooves us to know how to get image data out of <code class="docutils literal notranslate"><span class="pre">FITS</span></code> files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your Code Here </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Your code</span>
+<span class="k">def</span> <span class="nf">implot</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    WRITE DOCSTRING HERE</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span> <span class="c1">#replace with your code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When I do this, the colorbar is matching the figure height, rather than the axis height. If that bugs you like it bugs me, jump to the bottom of this workbook for a slightly more complicated, but robust, way of making the colorbar exactly the height (or width) of the axis.</p>
+</div>
+<p>In order to plot in RA and DEC coordinates, we need to first have an <code class="docutils literal notranslate"><span class="pre">astropy</span></code> <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object associated with the image in question. You can import <code class="docutils literal notranslate"><span class="pre">WCS</span></code> from <code class="docutils literal notranslate"><span class="pre">astropy.wcs</span></code>. WCS objects are created from the headers of plate-solved fits files. In our function, we allow the user to input either a header or a WCS object directly. More on WCS can be found in the lecture notes, or <a class="reference external" href="https://docs.astropy.org/en/stable/wcs/index.html">here</a>.</p>
+<div class="admonition-exercise-2-4-adding-wcs-plotting admonition">
+<p class="admonition-title">Exercise 2.4: Adding WCS Plotting</p>
+<p>Within your function, check if a wcs is input – if it is, we’re good to go and can safely ignore <code class="docutils literal notranslate"><span class="pre">header</span></code> (even if it is provided). If instead only <code class="docutils literal notranslate"><span class="pre">header</span></code> is provided, use the <code class="docutils literal notranslate"><span class="pre">WCS()</span></code> function to create a new wcs object from that header.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You’ll want to do this at the very top of your function.</p>
+</div>
+<p>We now need to move our <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">....</span></code> creation line into an if-statement. If we are using WCS “stuff”, you’ll need to set a <code class="docutils literal notranslate"><span class="pre">projection</span></code> for your plot that uses the wcs. This is accomplished as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="o">...</span><span class="p">,</span><span class="n">subplot_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;projection&#39;</span><span class="p">:</span><span class="n">wcs</span><span class="p">})</span> 
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">wcs</span></code> is whatever you’ve named the output of <code class="docutils literal notranslate"><span class="pre">WCS(header)</span></code> or is the WCS input directly into the function.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
+
+<span class="c1"># your code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In this case, we will get an error from our function that happens because of some distortion coefficient nonsense between astropy and drizzled HST images. Since it’s not pertinent to our lab, I’m providing below a snippet of code you should use to fix your header before running <code class="docutils literal notranslate"><span class="pre">WCS(header)</span></code>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">strip_SIP</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
+    <span class="n">A_prefixes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;A_&#39;</span><span class="p">)]</span>
+    <span class="n">B_prefixes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;B_&#39;</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A_prefixes</span><span class="p">,</span><span class="n">B_prefixes</span><span class="p">):</span>
+        <span class="k">del</span> <span class="n">header</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">header</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">header</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If this worked correctly, when you add the header you read in from our image, you should now see the axes of your plot change from pixels to <code class="docutils literal notranslate"><span class="pre">pos.eq.ra</span></code> and <code class="docutils literal notranslate"><span class="pre">pos.eq.dec</span></code>. We’re now looking at actual on-sky coordinates! Yay!</p>
+<div class="admonition-exercise-2-5-plotting-goodies admonition">
+<p class="admonition-title">Exercise 2.5: Plotting Goodies</p>
+<p>Within the if-blocks of your function that sets the <code class="docutils literal notranslate"><span class="pre">ax</span></code> to be a wcs projection, set the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> labels to read “Right Ascension [hms]” and “Declination [degrees]” in fontsize 15.</p>
+<p>Lastly, to polish things off, use <code class="docutils literal notranslate"><span class="pre">ax.tick_params()</span></code> to set inward, larger ticks, and increase the axis tick label size to 15.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You’ll notice (especially with larger ticks) that the are not perpendicular to the axes spines. This is because this particular image has been rotated with respect to the standard celestial coordinate axes. This can be seen more clearly if you add the following to your function:
+<code class="docutils literal notranslate"><span class="pre">ax.coords.grid(color='gray',</span> <span class="pre">alpha=0.5,</span> <span class="pre">linestyle='solid')</span></code>. Try doing that, adding an optional keyword to your function called ‘grid’ and enabling this command if it is set.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To check if a condition is true (e.g, <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">condition</span> <span class="pre">==</span> <span class="pre">True:</span></code>), you can just type <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">condition:</span></code></p>
+</div>
+<p>It’s taken us some time, but this image could now be placed in a scientific publication. And, since we have a handy function for it, we can make images that look this nice on the fly with a short one line command, yet still have a lot of flexibility over many important inputs. And of course, the figure and axes objects are returned, so one could run this function and then continue tweaking the plot after the fact.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As a final note, I want to draw your attention to the fact that once you use the <code class="docutils literal notranslate"><span class="pre">wcs</span></code> projection on some plot, it’s no longer a normal ax object, it’s a wcsax object. This makes changing certain elements of those axes a little more involved than for a standard one. I use <a class="reference external" href="https://docs.astropy.org/en/stable/visualization/wcsaxes/ticks_labels_grid.html">this page</a> and the others linked there when doing so.</p>
+</div>
+</div>
+<section id="cutouts">
+<h2>Cutouts<a class="headerlink" href="#cutouts" title="Permalink to this heading">#</a></h2>
+<p>When working with astronomical images, like the one we’ve been using in this lab, it is often advantageous to be working with a cutout – a chunk of the image centered on a certain coordinate, and of a certain size. For example, if there is an HII region or star cluster of interest in the above image, we may like to zoom in on it to examine it more closely.</p>
+<p>Now that we’ve switched over to using celestial coordinates instead of pixels as our projection frame, zooming in on a region is not as simple as slicing our array, e.g., <code class="docutils literal notranslate"><span class="pre">image[500:700,200:550]</span></code>. On the plus side, the framework we’ll learn here is very robust, and will allow for all sorts of useful measurements.</p>
+<p>To make a cutout, we’ll need the <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code> module within <code class="docutils literal notranslate"><span class="pre">astropy</span></code>, which I’ll import below. To provide the position of the cutout, we need to be able to feed in astronomical coordinates. For this, we’ll use <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>, a module in <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>. Finally, we’ll need to integrate the <code class="docutils literal notranslate"><span class="pre">units</span></code> module in <code class="docutils literal notranslate"><span class="pre">astropy</span></code> to successfully create coordinate objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.nddata</span> <span class="kn">import</span> <span class="n">Cutout2D</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s start with a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object. There are several coordinate systems used in astronomy, e.g., Galactic coordinates (<span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(l\)</span>), Equatorial (<span class="math notranslate nohighlight">\(RA\)</span>, <span class="math notranslate nohighlight">\(DEC\)</span>). The most common (especially in any extragalactic setting) is RA and DEC (as you can see in the image you’ve plotted already).</p>
+<p>The <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.SkyCoord.html">documentation</a> for <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> is solid, and worth reading.</p>
+<p>The general way we create these objects is, e.g.,Let’s start with a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object. There are several coordinate systems used in astronomy, e.g., Galactic coordinates (<span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(l\)</span>), Equatorial (<span class="math notranslate nohighlight">\(RA\)</span>, <span class="math notranslate nohighlight">\(DEC\)</span>). The most common (especially in any extragalactic setting) is RA and DEC (as you can see in the image you’ve plotted already).</p>
+<p>The <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.SkyCoord.html">documentation</a> for <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> is solid, and worth reading.</p>
+<p>The general way we create these objects is, e.g.,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="s1">&#39;12:01:53.6 -18:53:11&#39;</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">hourangle</span><span class="p">,</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can input various types of strings and formattings for the coordinates, just be sure to specify the units as shown above. The documentation shows the various methods. You can also enter RA and DEC separately if you have them stored that way, e.g., <code class="docutils literal notranslate"><span class="pre">SkyCoord(ra=241.53,dec=7.1345,unit='deg')</span></code>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, use your fancy new function to plot the new cutout.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Cutout objects contain the image and their own wcs as attributes, accessible via, e.g., <code class="docutils literal notranslate"><span class="pre">cutout.data</span></code> and <code class="docutils literal notranslate"><span class="pre">cutout.wcs</span></code>.</p>
+</div>
+<p>Congrats! You’re now able to interact with images using <code class="docutils literal notranslate"><span class="pre">astropy</span></code>. Some next steps may be running sep/source extracter to find objects, or perform aperture photometry on regions of the image.</p>
+<p>If those are things you might actually do this summer, check out the second half of <a class="reference external" href="https://astro-330.github.io/Lab2/Lab2.html">this lab</a> to continue along this path.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/bootcamp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="FunctionalProgramming.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Functional Programming: Maximizing the Efficacy of Python Functions</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Astronomical Imaging and FITS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-an-image">What’s in an image</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#image-handling-with-astropy">Image Handling with Astropy</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-the-image">Opening the Image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-preview">Lab Preview</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-astronomical-images">Lab: Astronomical Images</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cutouts">Cutouts</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Imad Pasha
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
