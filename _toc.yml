@@ -6,4 +6,6 @@ root: intro
 chapters:
 - file: notebooks/bootcamp/Installation.ipynb
 - file: notebooks/bootcamp/Environments.ipynb
+- file: notebooks/bootcamp/IntroductionToPython_1.ipynb
+- file: notebooks/bootcamp/IntroductionToPython_2.ipynb
 - file: notebooks/bootcamp/FunctionalProgramming.ipynb
