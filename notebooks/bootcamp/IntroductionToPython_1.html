@@ -1,0 +1,1061 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>A Day One Introduction to Python &#8212; Yale Umbrella Academy Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bootcamp/IntroductionToPython_1';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="A Day 2 Introduction to Python" href="IntroductionToPython_2.html" />
+    <link rel="prev" title="Environments" href="Environments.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Yale Summer Umbrella Academy: A Crash Course in Scientific Computing
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Python Installation and Setup for Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Environments.html">Environments</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">A Day One Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_2.html">A Day 2 Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionalProgramming.html">Functional Programming: Maximizing the Efficacy of Python Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/prappleizer/umbrella-academy" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/prappleizer/umbrella-academy/issues/new?title=Issue%20on%20page%20%2Fnotebooks/bootcamp/IntroductionToPython_1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/bootcamp/IntroductionToPython_1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A Day One Introduction to Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">PART 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types-in-python">Data Types in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#booleans">Booleans</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists">Lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">Dictionaries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">Tuples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up">Wrap up</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-day-one-introduction-to-python">
+<h1>A Day One Introduction to Python<a class="headerlink" href="#a-day-one-introduction-to-python" title="Permalink to this heading">#</a></h1>
+<p>A “bootcamp” tutorial for the absolute basics of Python in 2 parts</p>
+<section id="part-1">
+<h2>PART 1<a class="headerlink" href="#part-1" title="Permalink to this heading">#</a></h2>
+<p>Welcome. In this tutorial, we’re going to work through the absolute basics of the Python programming language. I highly recommend reading Chapter 2 of the textbook either before, or concurrently, with working through this tutorial. It will cover much the same ground, but here you’ll get to actively practice the techniques described.</p>
+<p>Let’s start with the concept of a <strong>declaration</strong>. In Python, our primary goal is to perform calculations - you can think of it as an extremely powerful powerful calculator, and indeed, much of what we build in python amount to pipelines that string simple mathematical computations together and perform them on data.</p>
+<p>In order to work with more complex data than a pocket calculator (in which we type in the numbers to be computed directly), Python allows us to declare <strong>variables</strong> to store those values for later use. See below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variable_1</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variable_2</span> <span class="o">=</span> <span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">variable_1</span> <span class="o">+</span> <span class="n">variable_2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+</pre></div>
+</div>
+</div>
+</div>
+<p>All I did was store the numbers 5 and 6 into variables (which I lazily and poorly named ‘variable_1’ and ‘variable_2’), and then computed their sum. <strong>Note:</strong> One additional takeaway here is the underscore in the variable names - you cannot have spaces in variable names, so often programmers use underscores when needed. We’ll talk later about best practices when naming variables.</p>
+<p>You might be asking, “Why did you go through the work of declaring those variables and adding them, when you could’ve just done:”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span><span class="o">+</span><span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this particular case, you are absolutely right. If I wanted to know the sum of 5 and 6, I could’ve just typed it in. Indeed, even if I needed to save that output somewhere, I could’ve done</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output2</span> <span class="o">=</span> <span class="mi">5</span><span class="o">+</span><span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now, I can at any time look at that:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">output2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or, I can use it in further calculations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output3</span> <span class="o">=</span> <span class="n">output2</span><span class="o">*</span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">output3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now might be a good time to go over the native mathematical operations available to you in Python (we’ve seen 2 so far).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">addition</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="n">subtraction</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">-</span> <span class="mi">5</span>
+<span class="n">multiplication</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="n">division</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">6</span> <span class="c1">#be careful of Python version!!</span>
+<span class="n">exponentiation</span> <span class="o">=</span> <span class="mi">5</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">modulus</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What did I mean by “Be careful of Python Version” in the comment above (<strong>note:</strong> you can use comments in lines of code, via the # symbol, to leave descriptions and instructions in your code that aren’t seen or run by the interpreter).</p>
+<p>Let’s do an experiment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">division</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wait, that’s not right. 5/6 isn’t 0.</p>
+<p>What we’re seeing here is a result of the <strong>datatypes</strong> we’ve been using. In Python version 2.xx (as opposed to any version of Python 3), numbers like those I’ve been using are treated as <strong>integers</strong> - the computer only knows their values to the “one’s place,” and thus finds 5/6 to be 0.</p>
+<p>What if we want a more accurate answer? In Python 3, they resolved this issues by performing all calculations in <strong>floating point</strong> – which means including the decimial values. We can do that ourselves in a few ways:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">5.0</span> <span class="o">/</span> <span class="mf">6.0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">float</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8333333333333334
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above illustrates 3 points. The first is that when directly typing in numbers, just adding a “.” turns the integer into a float, meaning the calculation is done correctly. The second is that you can force any integer to be a float by <strong>typecasting</strong> it using the command I showed (the same goes in reverse, you can use int(some_variable) to round what might be a floating point number to an integer. The third is that only one number in a calculation needs to be float for the whole calculation to be performed as a floating point operation - I could’ve chose either the 5 or the 6 to make a float, but only need to choose one.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise 1: A simple calculation</p>
+<p>In the box below, create 3 variables which hold your age and the ages of both of your parents. Then, set a variable named “age_average” that is equal to the average of your three ages. Be careful of order of operations! You can group operations, just like in PEMDAS math, using soft parenthesis “()”.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">age_average</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-types-in-python">
+<h2>Data Types in Python<a class="headerlink" href="#data-types-in-python" title="Permalink to this heading">#</a></h2>
+<p>So far, we have been working entirely with numbers (integers and floats). You can tell what data type a variable is at any time using the “type()” command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">6.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;type &#39;int&#39;&gt;
+&lt;type &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>While, at the very bottom of things, your data will always be numbers like this, Python’s power comes in when you start looking at it’s other data types, which are primarily set up to contain numbers in an organized way. Here are the basic data types in Python:</p>
+<ul class="simple">
+<li><p>Integers</p></li>
+<li><p>Floats</p></li>
+<li><p>Booleans (True or False)</p></li>
+<li><p>Lists (collections of items)</p></li>
+<li><p>Dictionaries (collections accessed via “keys”)</p></li>
+<li><p>Strings (contained in quotes “like this”)</p></li>
+<li><p>Tuples (like lists, but immutable (unchangeable))</p></li>
+</ul>
+<p>In the next few sections, we are going to learn about these data types (skipping integers and floats, which we’ve mostly covered).</p>
+<section id="booleans">
+<h3>Booleans<a class="headerlink" href="#booleans" title="Permalink to this heading">#</a></h3>
+<p>Booleans have a one of two states,”True” or “False”. Try setting a variable equal to True or False in the box below - you should see Python “color” the word to indicate syntactically that it is a special word in Python that has a specific meaning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">true</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">false</span> <span class="o">=</span> <span class="kc">False</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">true</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>These come in handy when we are employing <strong>condiditional statements</strong> (coming up below) in which we say “Hey code, if some condition is True, do “X,” else if some other condition is True, do “Y”.</p>
+<p>Often we are using booleans without recognizing it.</p>
+</section>
+<section id="lists">
+<h3>Lists<a class="headerlink" href="#lists" title="Permalink to this heading">#</a></h3>
+<p>Lists are the most forgiving container in Python. Basically, we can shove whatever we want into a list, be they different data types, or even lists within lists. Of course, the usefulness of non-uniform containers becomes limited - the advantage to storing lots of numbers in a list is that you can then perform operations on them all without worrying that some won’t work.</p>
+<p>Here’s how we define a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a string&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The list above is kind of a mess - you’d almost never want a list to contain such a variety of things in it, but I wanted to highlight that, in principle, Python doesn’t care what you stick inside a list. In addition to manually specifiying what is in a list, we can use some generative functions to make lists for us when they have a regular form:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count_to_10</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count_to_10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</pre></div>
+</div>
+</div>
+</div>
+<p>What I’ve done above is run the “range()” function, which generates a list of numbers counting up. The form of the function is range(start, stop, step), where “start” is inclusive and “stop” is exclusive (e.g. [1,11) ). If I wanted 0-9, I would do</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<p>using the shortcut that if only 1 argument is used, “start” is assumed to be 0 and “step” is assumed to be 1 (it has to be an integer).</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise 2: skip-count</p>
+<p>Generate a list below containing the numbers 2, 4, 6, 8, … 100 and save it into a variable called skip_count. Then, below, print it to see you did it right.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">skip_count</span> <span class="o">=</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The tutorial on Loops and Conditionals is a great place to jump to once you have the hang of what lists are and how they’re defined - that tutorial shows how we use them.</p>
+</section>
+<section id="indexing">
+<h3>Indexing<a class="headerlink" href="#indexing" title="Permalink to this heading">#</a></h3>
+<p>When we want to see what is in a list, we print it. But sometimes we want to “pull out” individual elements of a list and use them in calculations. For that, we need to “slice” or <strong>index</strong> the list for the element we want. Lists are indexed such that the first element is assigned “0” (to remember this, I got into the habit of calling it the “0th index”). For example, using the list from above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;a string&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Basically, we put closed brackets at the end of the variable name and specify which index we want. We can also pull multiple:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a string&#39;, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that the 2 is not inclusive (it pulls 0th and 1st). We can also specify a skip:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a string&#39;, 6.0, [5, 6, 6]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>So what about that list within a list? If we want a specific number from it, we can use double indexing. Also, I’ll use this as a spot to show <strong>negative indexing</strong> which lets you count backwards from the end of a list (if that happens to be easier):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>What I did was pull the -1st element (final element, 2nd to last would be -2, etc), which was the inner list, and then I indexed <em>that</em> for it’s 1st element.</p>
+<div class="highlight-{admonition}**Try notranslate"><div class="highlight"><pre><span></span>In the cell below, get it to output the &quot;s&quot; in &quot;a string&quot; in the 0th element of the list. (It works the same way). 
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dictionaries">
+<h3>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this heading">#</a></h3>
+<p>Dictionaries are like lists, but rather than indexing them by element number as we were doing above, we index them by a special “key” that we assign to each “value”. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Sam&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;Sarah&#39;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;Kim&#39;</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="s1">&#39;Mukund&#39;</span><span class="p">:</span><span class="mi">17</span><span class="p">}</span>
+<span class="n">ages</span><span class="p">[</span><span class="s1">&#39;Sarah&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dictionaries are inherently unordered - the order I define things within the dictionary doesn’t matter, only that I know the key associated with each value. For some applications, this has advantages over a list. Here, if I were storing the ages of students in a class and was only interested in things like the average and median age, a list would be fine. But if I needed to know <em>who</em> was <em>which</em> age throughout my analysis, a list would require me to impose that the order went “sam, sarah, kim, mukund,” and to remember that order when indexing, and if the order in the list changes, keep track of those too.</p>
+</section>
+<section id="strings">
+<h3>Strings<a class="headerlink" href="#strings" title="Permalink to this heading">#</a></h3>
+<p>We’ve already seen strings used - It lets you store things like words (or, later on, filepaths) in your code that otherwise don’t have meaning as far as Python is concerned. Strings are the most forgiving data type of all; you can stick literally anything inside. If you have a data file with tons of different types of data in it, Python will often just read in everything as strings and let you work out how to convert the proper things into ints, floats, etc. Strings are iterable - they can be indexed like lists, character by character.</p>
+</section>
+<section id="tuples">
+<h3>Tuples<a class="headerlink" href="#tuples" title="Permalink to this heading">#</a></h3>
+<p>We don’t use them to often, so just check out this example and follow aloong!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">example_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">example_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 2, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>So I’ve successfully defined it as a tuple and list, and changed the 0th entry of the list. But what if I try on the tuple?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-35-33fef9f1448c&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">example_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="ne">TypeError</span>: &#39;tuple&#39; object does not support item assignment
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thus, I get an error. So basically, if you make a list-type item and want to make sure it can never be adjusted in your code, you can make it a tuple.</p>
+<p>For more examples of the basic manipulations you can make to these basic data types, check out Chapter 2 of the textbook, which lays some of them out!</p>
+<div class="admonition-exercise-3-bringing-it-together-kind-of admonition">
+<p class="admonition-title">Exercise 3: Bringing it together (kind of)</p>
+<p>Let’s try a single, longer example that (tries to) bring in the things we’ve seen above. You’ll find that part 2 of this bootcamp covers things like iterating/for loops and conditionals, which drastically increase what you can do with Python. Nevertheless, here’s some practice with the basic operations.</p>
+<p>Let’s say you’re the teacher of your school’s introductory Quantum Mechanics class. You’ve just graded their first midterm, and are shocked, (<em>shocked</em>) to see so many low scores (You thought the midterm was totally reasonable!)</p>
+<p>Before you post their individual scores, which might give some students a heart attack, you decide to calculate the distribution statistics of the exam first, so that each student can compare their score to the average, etc.</p>
+<p>The scores are (out of 120): 100, 68, 40, 78, 81, 65, 39, 118, 46, 78, 9, 37, 43, 87, 54, 29, 95, 87, 111, 65, 43, 53, 47, 16, 98, 82, 58, 5, 49, 67, 60, 76, 16, 111, 65, 61, 73, 63, 115, 72, 76, 48, 75, 101, 45, 46, 82, 57, 17, 88, 90, 53, 32, 28, 50, 91, 93, 7, 63, 88, 55, 37, 67, 0, 79.</p>
+<p>Your first step to analyzing these numbers should be to put them in a list (call it “scores”). Do that in a cell below (you can copy and paste from above, just add the list syntax).</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="c1">#your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise 3.1</p>
+<p>Now, the first thing we need to do is calculate the average score. Later on, we’ll see that there are external functions you can import into Python that will just do this for you, but for now let’s calculate it manually (it’s easy enough, right?).</p>
+<p>Above, we saw use of the sum() function - as it turns out, you can run the sum() function on a list (so long as it only contains numbers) and it will tell you the sum. The only other thing you’ll need to calculate the average is the len() function, which returns the number of elements in a list/array. Using those two, define a variable below called “average_score” and calculate it.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">average_score</span> <span class="o">=</span> <span class="c1">#your code here</span>
+<span class="n">average_score</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise 3.2</p>
+<p>Great, so we now know what the average score on the test was. Let’s figure out what that is in percent. In the cell below, calculate the percentage value of the average score by dividing it by the number of points on the test, and mulitplying that by 100 in the same line. Then, run the cell - you’ll see a nice sentence output that lists the percentage, take a look at the line I wrote that does this and see if you can glean how it worked.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg_score_percent</span> <span class="o">=</span> <span class="c1">#your code here</span>
+
+<span class="n">shortened</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">avg_score_percent</span><span class="p">)</span> <span class="c1">#turn it into a string</span>
+<span class="n">statement</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The average score on the test was a </span><span class="si">{</span><span class="n">str_version</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Okay, so the other thing students are always interested in is the standard deviation from the mean - this basically will tell them whether they get an A, B, C, D, or F on the test assuming you curve. Let’s be nice, and assume we are going to curve the average to a flat B (85%). The formula for a standard deviation is
+$<span class="math notranslate nohighlight">\( 
+s = \sqrt{\frac{\sum_{1}^{N}(x_i - \mu)^2}{N-1}}
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the average and N is the total number of scores.</p>
+<p>We already know how to get N, and we know what <span class="math notranslate nohighlight">\(\mu\)</span> is as well. So to calculate this, we need to know how to calculate the quantity on the top of the fraction. This is actually kind of tricky with the methods we have on hand, so I’m going to introduce a new concept: Numpy (numerical python) arrays. I’m going to get into these in detail in part 2 of the bootcamp, but for now, see the example below for elucidation on why we’re about to use them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">arr_version</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-70-b292ed98c843&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">arr_version</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for -: &#39;list&#39; and &#39;int&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Okay, so I can’t subtract an integer from a list. What if I try the array version?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">arr_version</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 99  67  39  77  80  64  38 117  45  77   8  36  42  86  53  28  94  86
+ 110  64  42  52  46  15  97  81  57   4  48  66  59  75  15 110  64  60
+  72  62 114  71  75  47  74 100  44  45  81  56  16  87  89  52  31  27
+  49  90  92   6  62  87  54  36  66  -1  78]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you look, you should see that each of those scores is the original score with one subtracted off it. Your spidey senses should be tingling then for how we can leverage this functionality to calculate our STD. In the cell below, fill in the variable I’m calling “top_frac” to calculate this quantity:
+$<span class="math notranslate nohighlight">\(
+\sum_{i=1}^N (x_i - \mu)^2
+\)</span>$</p>
+<p>Notice here that you don’t have to actually calculate it one by one - if we first compute a single array that represents each score with the mean subtracted off and then that value squared, then we finish off top_frac just by summing up that array as we’ve done before.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise 3.3</p>
+<p>Calculate the quantity on the top of the fraction, and then the standard deviation of the scores.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_frac</span> <span class="o">=</span> <span class="c1">#your code here</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">top_frac</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With that done, we can easily apply the formula to get the final STD - <strong>Hint:</strong> the function np.sqrt() will be useful here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">STD_scores</span> <span class="o">=</span> <span class="c1">#your code here</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">STD_scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alright! If you’ve done everything correctly, you should have found that the average score is a 61/120, with a stadard deviation of 28. Let’s, for fun, make a helpful plot to show the students their scores. Don’t worry about how the plotting stuff works just yet, we’ll dive into it more in part 2, but see if you can figure out what each part of the command is doing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">61</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">89</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;+1 STD&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;-1 STD&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;score (out of 120)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Students&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1099876d0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/7d4e9d4fe52fcc29ab53849aa662e09e05595bbbc681e7b5bfb34ba5618aa496.png" src="../../_images/7d4e9d4fe52fcc29ab53849aa662e09e05595bbbc681e7b5bfb34ba5618aa496.png" />
+</div>
+</div>
+<p>Nice! It looks like our formula for standard deviation successfully describes the original distribution of scores pretty well. Now, how to get them to do better on midterm 2….</p>
+</section>
+</section>
+<section id="wrap-up">
+<h2>Wrap up<a class="headerlink" href="#wrap-up" title="Permalink to this heading">#</a></h2>
+<p>I hope this super-basic introduction has given you a glimpse at some of the basic functionality of Python. Of course, Python is way more powerful than what has been shown here. I call this Part 1 because once you know the basic data types, how to define variables, and do some simple math on them, we are going to need to jump into new concepts — for loops and conditional statements, as well as invoke new libraries (like numpy and matplotlib) to do make further progress. If you’re ready to do that, head on over to Part 2!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/bootcamp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Environments.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Environments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="IntroductionToPython_2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">A Day 2 Introduction to Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">PART 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types-in-python">Data Types in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#booleans">Booleans</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists">Lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing">Indexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">Dictionaries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">Tuples</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up">Wrap up</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Imad Pasha
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
