@@ -504,10 +504,9 @@ document.write(`
 </div>
 </div>
 <p>Several things about our function have improved in this iteration. First, we have added <em>type hinting</em> to the function arguments. By adding colons and the expexted data type of that variable, we clue the user (including ourselves, later) in to what types of input this function needs. For example, it is useful to know that <code class="docutils literal notranslate"><span class="pre">x_loc</span></code> and <code class="docutils literal notranslate"><span class="pre">y_loc</span></code> must be integer inputs.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Quick Exercise
-Why will the above function fail if a non integer is input for <code class="docutils literal notranslate"><span class="pre">x_loc</span></code>?</p>
+<div class="tip admonition">
+<p class="admonition-title">Quick Exercise</p>
+<p>Why will the above function fail if a non integer is input for <code class="docutils literal notranslate"><span class="pre">x_loc</span></code>?</p>
 </div>
 <p>Additionally, we have utilized the use of <em>optional</em> keyword arguments, which both have type hints <em>and</em> default values. If you look inside the function, the first few lines now handle what happens when these values are <code class="docutils literal notranslate"><span class="pre">None</span></code>.
 And finally, we have added properly formatted documentation, which defines the parameters of the function, descriptions of them, and describes what the function outputs. This lets us now run, e.g., the <code class="docutils literal notranslate"><span class="pre">help()</span></code> function on it:</p>

@@ -365,9 +365,8 @@ document.write(`
 <p>It is always a good idea to create a <em>new</em> environment when you are starting a new research project, installing a particularly complex code that has a lot of dependencies, or developing your own piece of software.</p>
 </div>
 <p>You should by now have <code class="docutils literal notranslate"><span class="pre">miniconda</span></code> installed, meaning you are ready to create an environment and install python. Let’s do it!</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><em>Exercise One: Make an Environment</em></p>
+<div class="tip admonition">
+<p class="admonition-title"><em>Exercise One: Make an Environment</em></p>
 <p>In your shell/terminal (Terminal on Mac, Ubuntu on WSL), write</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>YOURNAMEHERE<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11<span class="w"> </span>numpy<span class="w"> </span>scipy<span class="w"> </span>matplotlib<span class="w"> </span>astropy<span class="w"> </span>pandas<span class="w"> </span>jupyterlab<span class="w"> </span>ipython<span class="w"> </span>ipykernel<span class="w"> </span>nb_conda_kernels
 </pre></div>
@@ -376,9 +375,8 @@ document.write(`
 </div>
 <p>When you run this, you will eventually get a prompt asking for a <code class="docutils literal notranslate"><span class="pre">Y/n</span></code> input; type <code class="docutils literal notranslate"><span class="pre">Y</span></code> and hit enter.</p>
 <p>What this commmand does is create a new environment with the name you give it. We’ve specifically told it to use Python 3.11. We’ve also given it a list of packages that can be installed via conda; I chose these because they are universally useful in astronomy and we will need them anyway. You <em>can</em> specify their versions here, as we did for python, but for now, we just want the latest versions.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><em>Exercise Two: Activate Your Environment</em></p>
+<div class="tip admonition">
+<p class="admonition-title"><em>Exercise Two: Activate Your Environment</em></p>
 <p>Once your environment is created, you’ll see instructions for “activating” it. Follow them, e.g.,</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>myenvironment
 </pre></div>
@@ -390,10 +388,9 @@ pip<span class="w"> </span>install<span class="w"> </span>astroquery
 </pre></div>
 </div>
 </div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Conda vs. Pip installs
-When do we install a package using <code class="docutils literal notranslate"><span class="pre">conda</span></code>, and when do we use <code class="docutils literal notranslate"><span class="pre">pip</span></code>? This is a bit messy, but in general, I suggest checking first if a conda version of the package is available. If it is, try installing via <code class="docutils literal notranslate"><span class="pre">conda</span></code> first. If not, or if that fails, then fall back on using <code class="docutils literal notranslate"><span class="pre">pip</span></code> (<em>Inside your environment of course!</em>). Using <code class="docutils literal notranslate"><span class="pre">pip</span></code> inside an environment will still mean you are only installing to that environment, but some of <code class="docutils literal notranslate"><span class="pre">conda</span></code>’s ways of measuring package dependencies and compatibility don’t extend to things installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>. Generally, we create environments with the “big things” installed with conda (as above), then install smaller, or pip-only things, inside with pip.</p>
+<div class="important admonition">
+<p class="admonition-title">Conda vs. Pip installs</p>
+<p>When do we install a package using <code class="docutils literal notranslate"><span class="pre">conda</span></code>, and when do we use <code class="docutils literal notranslate"><span class="pre">pip</span></code>? This is a bit messy, but in general, I suggest checking first if a conda version of the package is available. If it is, try installing via <code class="docutils literal notranslate"><span class="pre">conda</span></code> first. If not, or if that fails, then fall back on using <code class="docutils literal notranslate"><span class="pre">pip</span></code> (<em>Inside your environment of course!</em>). Using <code class="docutils literal notranslate"><span class="pre">pip</span></code> inside an environment will still mean you are only installing to that environment, but some of <code class="docutils literal notranslate"><span class="pre">conda</span></code>’s ways of measuring package dependencies and compatibility don’t extend to things installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>. Generally, we create environments with the “big things” installed with conda (as above), then install smaller, or pip-only things, inside with pip.</p>
 </div>
 <p>You’ve made it to the end of Environments! To summarize our main points:</p>
 <ul class="simple">
