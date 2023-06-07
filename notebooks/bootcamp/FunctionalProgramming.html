@@ -162,11 +162,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_1.html">A Day One Introduction to Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_2.html">A Day Two Introduction to Python</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Functional Programming: Maximizing the Efficacy of Python Functions</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="AstronomicalImaging.html">Astronomical Imaging and FITS</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="MakingYourOwn.html">Making your own packages (and installing them!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnitTesting.html">Unit Testing</a></li>
+
 </ul>
 
     </div>
@@ -360,16 +361,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Functional Programming: Maximizing the Efficacy of Python Functions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-and-type-hinting">Documentation and Type Hinting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-allowed-types">Multiple Allowed Types</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -593,11 +589,6 @@ centroid_2D(pixels: &lt;built-in function array&gt;, x_loc: int, y_loc: int, x_w
 </section>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="testing">
-<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h1>
-<p>Testing is the process of ensuring that our analysis and pipelines are actually working and giving us the right answers, as well as ensuring that changes or new features to a codebase don’t break something that currently works. This is done using tools which run our code on known, canned problems and compare the outputs to what is expected.</p>
-<p>While testing is an absolute essential for large or community-maintained projects, it is never too early to implement testing in your own research code. It will make your code more robust, and also encourage good programming practices. There is even a <em>mode</em> of coding known as</p>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -666,16 +657,11 @@ centroid_2D(pixels: &lt;built-in function array&gt;, x_loc: int, y_loc: int, x_w
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Functional Programming: Maximizing the Efficacy of Python Functions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-and-type-hinting">Documentation and Type Hinting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-allowed-types">Multiple Allowed Types</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>

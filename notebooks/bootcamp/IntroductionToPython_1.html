@@ -164,11 +164,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">A Day One Introduction to Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_2.html">A Day Two Introduction to Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FunctionalProgramming.html">Functional Programming: Maximizing the Efficacy of Python Functions</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="AstronomicalImaging.html">Astronomical Imaging and FITS</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="MakingYourOwn.html">Making your own packages (and installing them!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnitTesting.html">Unit Testing</a></li>
+
 </ul>
 
     </div>
@@ -535,7 +536,7 @@ document.write(`
 </div>
 </div>
 <p>The above illustrates 3 points. The first is that when directly typing in numbers, just adding a “.” turns the integer into a float, meaning the calculation is done correctly. The second is that you can force any integer to be a float by <strong>typecasting</strong> it using the command I showed (the same goes in reverse, you can use int(some_variable) to round what might be a floating point number to an integer. The third is that only one number in a calculation needs to be float for the whole calculation to be performed as a floating point operation - I could’ve chose either the 5 or the 6 to make a float, but only need to choose one.</p>
-<div class="note admonition">
+<div class="admonition-exercise-1-a-simple-calculation admonition">
 <p class="admonition-title">Exercise 1: A simple calculation</p>
 <p>In the box below, create 3 variables which hold your age and the ages of both of your parents. Then, set a variable named “age_average” that is equal to the average of your three ages. Be careful of order of operations! You can group operations, just like in PEMDAS math, using soft parenthesis “()”.</p>
 </div>
@@ -649,7 +650,7 @@ document.write(`
 </div>
 </div>
 <p>using the shortcut that if only 1 argument is used, “start” is assumed to be 0 and “step” is assumed to be 1 (it has to be an integer).</p>
-<div class="note admonition">
+<div class="admonition-exercise-2-skip-count admonition">
 <p class="admonition-title">Exercise 2: skip-count</p>
 <p>Generate a list below containing the numbers 2, 4, 6, 8, … 100 and save it into a variable called skip_count. Then, below, print it to see you did it right.</p>
 </div>
@@ -803,7 +804,7 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="note admonition">
+<div class="admonition-exercise-3-1 admonition">
 <p class="admonition-title">Exercise 3.1</p>
 <p>Now, the first thing we need to do is calculate the average score. Later on, we’ll see that there are external functions you can import into Python that will just do this for you, but for now let’s calculate it manually (it’s easy enough, right?).</p>
 <p>Above, we saw use of the sum() function - as it turns out, you can run the sum() function on a list (so long as it only contains numbers) and it will tell you the sum. The only other thing you’ll need to calculate the average is the len() function, which returns the number of elements in a list/array. Using those two, define a variable below called “average_score” and calculate it.</p>
@@ -816,7 +817,7 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="note admonition">
+<div class="admonition-exercise-3-2 admonition">
 <p class="admonition-title">Exercise 3.2</p>
 <p>Great, so we now know what the average score on the test was. Let’s figure out what that is in percent. In the cell below, calculate the percentage value of the average score by dividing it by the number of points on the test, and mulitplying that by 100 in the same line. Then, run the cell - you’ll see a nice sentence output that lists the percentage, take a look at the line I wrote that does this and see if you can glean how it worked.</p>
 </div>
@@ -879,7 +880,7 @@ $<span class="math notranslate nohighlight">\(
 \sum_{i=1}^N (x_i - \mu)^2
 \)</span>$</p>
 <p>Notice here that you don’t have to actually calculate it one by one - if we first compute a single array that represents each score with the mean subtracted off and then that value squared, then we finish off top_frac just by summing up that array as we’ve done before.</p>
-<div class="note admonition">
+<div class="admonition-exercise-3-3 admonition">
 <p class="admonition-title">Exercise 3.3</p>
 <p>Calculate the quantity on the top of the fraction, and then the standard deviation of the scores.</p>
 </div>

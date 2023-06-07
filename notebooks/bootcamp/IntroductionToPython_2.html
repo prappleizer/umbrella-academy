@@ -164,11 +164,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_1.html">A Day One Introduction to Python</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">A Day Two Introduction to Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FunctionalProgramming.html">Functional Programming: Maximizing the Efficacy of Python Functions</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="AstronomicalImaging.html">Astronomical Imaging and FITS</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="MakingYourOwn.html">Making your own packages (and installing them!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnitTesting.html">Unit Testing</a></li>
+
 </ul>
 
     </div>
@@ -483,7 +484,7 @@ document.write(`
 <section id="loadtxt-and-genfromtxt">
 <h3>Loadtxt() and Genfromtxt()<a class="headerlink" href="#loadtxt-and-genfromtxt" title="Permalink to this heading">#</a></h3>
 <p>Astronomical data are stored in a huge variety of file formats and organizational schemes. Let’s start with the most simple and build up. In Ye Olde Days, basically all data were kept in plaintext ASCII files — in short, text. Things have changed recently, though often times data tables are still the most efficient means of storage, they are now wrapped inside file formats like FITS and HDF5 to make them more portable and stable over time. At the end of the day, we are most interested in getting past those layers of protocols to the raw numbers underneath, which we want sitting around in arrays we can mess with.</p>
-<div class="note admonition">
+<div class="admonition-loading-an-ascii-file admonition">
 <p class="admonition-title">Loading an ASCII File</p>
 <p>Let’s start with that most simple of cases: The ASCII text file.
 From the dependencies, you should have downloaded the “quantum_mechanics.grades” file from the website. <em>Note:</em> Often, when working with ascii, programmers will set up their programs to output text files with extensions that indicate what they are (like data.spec and data.phot), rather than .txt — but rest assured, they are all text files and can be viewed in a text viewer like Sublime.</p>
@@ -679,7 +680,7 @@ My age is: 9
 </div>
 </div>
 <p>What I’ve done here is make a list containing all the scores, as floats! For each item in class grades, I first take the 1st element (the i[1] part), then I force it to be a float (this wouldn’t work if they weren’t numbers in the strings), then I <strong>appended</strong> that value to the empty to_fill array outside. Appending to lists is easy, as shown, as a <em>method</em> of lists. So to add anything to the end of a list, you just write list_name.append(thing_to_add).</p>
-<div class="note admonition">
+<div class="admonition-exercise-1-a-dictionary-of-student-names-scores admonition">
 <p class="admonition-title">Exercise 1: A dictionary of student names / scores</p>
 <p>OK, it’s time for you to dive in! Once you’ve gotten the hang of the above, and maybe played around a bit with it, try the following.</p>
 <p>In the cell block below, define an empty dictionary called class_dictionary. Then, initialize a for-loop that goes through the class_grades array, and puts each student name (as a string) as a key, and their score (as a float) as a value.</p>
@@ -703,12 +704,23 @@ My age is: 9
 </div>
 </div>
 <p>Did you get 67.0?</p>
+<div class="admonition-exercise-1-2 admonition">
+<p class="admonition-title">Exercise 1.2</p>
+<p>Hmmm… I wonder, who did the best and worst on the midterm? You might want to send one a congrats, and reach out to the other for why they are struggling. Of course, we could just look through our class_grades array, but not only is that no fun, it would be annoying in a class of 900, and impossible in a data-set of millions.</p>
+<p>Luckily, Python, and Numpy, come with max() and min() functions we can use to do this (the subtly over when you want to use max() and np.max() can be brushed over for now — my general advice is to just default to using numpy versions of functions).</p>
+<p>Remember the “to_fill” list I made above? That has the list, in the original order, of scores on the test.
+In the cell below, set variables for “max_score” and “min_score” by using the np.max() and np.min() functions on that list, then print them out.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#code here</span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="admonition-exercise-1-3 admonition">
+<p class="admonition-title">Exercise 1.3</p>
+<p>Cool, so we know one person got a 0 and one got a 118/120. But <em>who</em> were they? Turns out, np has a handy function that tells us, instead of the max and min, the <em>positions</em> of the max and min in the array. Try the same block of code below, but use <code class="docutils literal notranslate"><span class="pre">np.argmax()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.argmin()</span></code> instead, and save them into variables “pos_max” and “pos_min” (for position).</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -820,7 +832,7 @@ One is not present
 </div>
 </div>
 <p>Take a moment parsing the above, seeing how you can string together conditionals. You can ask if things are in, or not in, other things, or you can compare values by asking if things are equal (==), not equal (!=), or greater than/less than (&gt;, &lt;).</p>
-<div class="note admonition">
+<div class="admonition-exercise-2-sort-the-students admonition">
 <p class="admonition-title">Exercise 2: Sort the students</p>
 <p>Below, write a for-loop that goes through the array class_grades and checks if their score is above or below the mean score. If their score is above the mean, append that students mini-array into an externally defined list called proficient_students, and if not, put them in one called struggling_students.</p>
 </div>
@@ -948,7 +960,7 @@ One is not present
 <img alt="../../_images/30b34dc6b388e078891b9e7561cfd9fc07126b1251cc61294802dce85b3e71a0.png" src="../../_images/30b34dc6b388e078891b9e7561cfd9fc07126b1251cc61294802dce85b3e71a0.png" />
 </div>
 </div>
-<div class="note admonition">
+<div class="admonition-exercise-3-percentiles admonition">
 <p class="admonition-title">Exercise 3: Percentiles</p>
 <p>Often we are interested in knowing the percentiles of a distribution — the standard in statistics is the 16th, 50th, and 84th percentile. You can calculate these easily with <code class="docutils literal notranslate"><span class="pre">np.percentile(array_like,#)</span></code>, where # is the percentile you want to calculate.</p>
 <p>In the cell below, plot vertical dashed lines for the 16th, 50th, and 84th percentiles of the distribution. I’ll tell you that the function <code class="docutils literal notranslate"><span class="pre">plt.axvline(value,ls='--',color='k')</span></code> will plot a vertical black dashed line at a certain x-axis value “value”. In the block below, reproduce the plot in the cell above, but with the standard percentile spots demarcated by vertical dashed lines.</p>
@@ -1150,6 +1162,10 @@ Take a look at the following:</p>
 </div>
 </div>
 <p>Cool! We’re basically ready to go here.</p>
+<div class="admonition-exercise-4-bar-chart admonition">
+<p class="admonition-title">Exercise 4: Bar Chart</p>
+<p>Using what I’ve illustrated above, make a function which takes any number of students in our sample above as strings, and makes the plot of their scores. It’s up to you which way you chose to index out the student’s scores, but the fastest way will be by invoking the class_dictionary we made above. Throw a title an axis labels on there while you’re at it. Then test it out on first 2 students, then 3.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#code here</span>
