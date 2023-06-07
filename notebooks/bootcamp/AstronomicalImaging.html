@@ -164,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_1.html">A Day One Introduction to Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_2.html">A Day Two Introduction to Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FunctionalProgramming.html">Functional Programming: Maximizing the Efficacy of Python Functions</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Astronomical Imaging and FITS</a></li>
 
 
@@ -605,12 +606,44 @@ And yet, even then, with permanent record, no measure could be made that weren�
 <p>Contextual clues are important when dealing with <code class="docutils literal notranslate"><span class="pre">FITS</span></code> files. Files that are explicitly single images almost always have the image stored in the 0th extension, while files that are explicitly table data tend to have the table stored in the 1st extension (with the 0th empty).</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">FITS</span></code> standard is pretty old, and may be retired soon, but almost all ground based telescopes still use it for their native image output, so it behooves us to know how to get image data out of <code class="docutils literal notranslate"><span class="pre">FITS</span></code> files.</p>
+<div class="admonition-exercise-1-loading-a-fits-file admonition">
+<p class="admonition-title">Exercise 1: Loading a FITS File</p>
+<p>Write a function which takes as its argument a <code class="docutils literal notranslate"><span class="pre">string</span></code> filepath to a <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file, and should have an optional argument to set the extension (default 0). It should then load the given extension of that <code class="docutils literal notranslate"><span class="pre">fits</span></code> file using a <a class="reference external" href="https://docs.astropy.org/en/stable/io/fits/index.html#opening-a-fits-file">context manager</a>, and return a tuple containing the header and data of that extension.</p>
+<p>The function should have documentation that describes the inputs and outputs.</p>
+<p>Then <strong>use your function</strong> to read in the antennae R-band image.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your Code Here </span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="admonition-exercise-2-1-plotting admonition">
+<p class="admonition-title">Exercise 2.1: Plotting</p>
+<p>Next, we need to plot the image data. There are several operations that we almost always perform when plotting astronomical data, as well as several user-preferences for how we “by default” plot images before we begin tweaking things. If you spend any time as an astronomer, you will plot quite literally <em>thousands</em> of images — why set all these settings every time, when we can write a handy function to do it for us?</p>
+<p>Write a function which takes in as input arguments</p>
+<ul class="simple">
+<li><p>an image (2D array or masked array)</p></li>
+</ul>
+<p>as well as the following optional arguments (so set a default)</p>
+<ul class="simple">
+<li><p>figsize (default (15,13) )</p></li>
+<li><p>cmap (default ‘gray_r’)</p></li>
+<li><p>scale (default 0.5)</p></li>
+<li><p>**kwargs (see <a class="reference external" href="https://prappleizer.github.io/Tutorials/FunctionalProgramming/FunctionalProgramming_web.html">here</a>)</p></li>
+</ul>
+<p>Inside the function, create figure and axes objects using <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code>. When working in notebooks, it is often useful to set the <code class="docutils literal notranslate"><span class="pre">figsize</span></code> argument of subplots to a nice large-ish value, such as <code class="docutils literal notranslate"><span class="pre">(15,13)</span></code>, which will make the image fill most of the notebook. Since <em>your</em> function has set figsize as an argument, you can feed <code class="docutils literal notranslate"><span class="pre">figsize</span></code> directly into the <code class="docutils literal notranslate"><span class="pre">subplots</span></code> call, so that a user of the function can leave the default or set their own.</p>
+<p>Next, use <code class="docutils literal notranslate"><span class="pre">ax.imshow()</span></code> to actually plot the image. You’ll want to save the output of this, e.g., <code class="docutils literal notranslate"><span class="pre">im</span> <span class="pre">=</span> <span class="pre">ax.imshow(...)</span></code>. In this plotting call, set <code class="docutils literal notranslate"><span class="pre">imshow</span></code>’s argument <code class="docutils literal notranslate"><span class="pre">origin='lower'</span></code>. We <em>always</em> want to do this when dealing with imaging, as we want (0,0) to be a coordinate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, matplotlib uses a “matrix-style” plotting, where 0 of the y axis is in the <em>top</em> left corner, and 0 of the x axis is in the <em>bottom</em> left corner.</p>
+</div>
+<p>Also within the call to <code class="docutils literal notranslate"><span class="pre">imshow()</span></code>, feed in the cmap from your function (i.e., <code class="docutils literal notranslate"><span class="pre">cmap=cmap</span></code>). The other critical <code class="docutils literal notranslate"><span class="pre">imshow()</span></code> arguments are <code class="docutils literal notranslate"><span class="pre">vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">vmax</span></code>, which sets the saturation points (and thus the contrast) of the image.</p>
+<p>We haven’t set <code class="docutils literal notranslate"><span class="pre">vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">vmax</span></code> as arguments of our outer function, but because of <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>, we can still create a default here that can be overriden from outside.</p>
+<p>As a default, within your function, calculate the mean and standard deviation of the image. Set some temporary variables with the quantities <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">-</span> <span class="pre">scale*sigma</span></code> and <code class="docutils literal notranslate"><span class="pre">mu</span> <span class="pre">+</span> <span class="pre">scale*sigma</span></code> (where here <code class="docutils literal notranslate"><span class="pre">mu</span></code> is the calculated mean and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> is the calculated std dev, and <code class="docutils literal notranslate"><span class="pre">scale</span></code> was the optional input). Next, check the kwargs dictionary (which will exist in your function because we added the packing argument <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> to our function. IF <code class="docutils literal notranslate"><span class="pre">vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">vmax</span></code> are in this dictionary, plug those into your imshow command. Otherwise, use the values determined by the calculation above. Bonus point for accomodating either no vmin/vmax entered, just vmin or vmax, or both (using the calculated values when things aren’t provided).</p>
+<p>Your function should <strong>return</strong> the created <code class="docutils literal notranslate"><span class="pre">fig</span></code> and <code class="docutils literal notranslate"><span class="pre">ax</span></code> objects so the user can continue to tweak them.</p>
+<p>Run your function and test its outputs. Once you’re satisfied it’s working, use it to plot the provided data. Find either a vmin/vmax pair, or a choice of <code class="docutils literal notranslate"><span class="pre">scale</span></code> which makes the image look pretty!</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -627,6 +660,25 @@ And yet, even then, with permanent record, no measure could be made that weren�
 </div>
 </div>
 </div>
+<div class="admonition-exercise-2-2-more-features admonition">
+<p class="admonition-title">Exercise 2.2 More: Features</p>
+<p>Copy your function down, we’re going to keep messing with it.</p>
+<p>So far, we’ve made it so that with a simple function call and, potentially, with just the input of an image array, we get out a nice plot with a scaling, colormap, and origin selection. In this section, we are going to allow (optionally) for a colorbar to be added to the figure. We’re also going to add in the ability for the figure to be plotted in celestial coordinates (i.e., RA and DEC) instead of pixel units, if information about the image (via the world coordinate system, WCS) exists in the image header.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Generally, WCS information is present in the headers of <em>published</em> images like the one here, but <em>not</em> present in raw data gathered at the telescope. This is because images need to undergo a process known as <em>plate solving</em> to determine both the direction (coordinates) toward the image, as well as the pixel scale (i.e., how many arcseconds per pixel in the image).</p>
+</div>
+</div>
+<p>Add three new optional arguments to your function.</p>
+<ul class="simple">
+<li><p>colorbar = False</p></li>
+<li><p>header = None</p></li>
+<li><p>wcs = None</p></li>
+</ul>
+<p>Let’s start with the colorbar. At the end of your plotting commands, check if <code class="docutils literal notranslate"><span class="pre">colorbar=True</span></code>, and if so, create a colorbar via <code class="docutils literal notranslate"><span class="pre">plt.colorbar()</span></code>, setting the <code class="docutils literal notranslate"><span class="pre">mappable</span></code> argument to whatever you saved the output of <code class="docutils literal notranslate"><span class="pre">ax.imshow()</span></code> into above. Also set the <code class="docutils literal notranslate"><span class="pre">ax</span></code> argument to be your ax; this will tell <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to steal a bit of space from that axis to make room for the colorbar.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code here</span>
@@ -639,8 +691,8 @@ And yet, even then, with permanent record, no measure could be made that weren�
 <p>When I do this, the colorbar is matching the figure height, rather than the axis height. If that bugs you like it bugs me, jump to the bottom of this workbook for a slightly more complicated, but robust, way of making the colorbar exactly the height (or width) of the axis.</p>
 </div>
 <p>In order to plot in RA and DEC coordinates, we need to first have an <code class="docutils literal notranslate"><span class="pre">astropy</span></code> <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object associated with the image in question. You can import <code class="docutils literal notranslate"><span class="pre">WCS</span></code> from <code class="docutils literal notranslate"><span class="pre">astropy.wcs</span></code>. WCS objects are created from the headers of plate-solved fits files. In our function, we allow the user to input either a header or a WCS object directly. More on WCS can be found in the lecture notes, or <a class="reference external" href="https://docs.astropy.org/en/stable/wcs/index.html">here</a>.</p>
-<div class="admonition-exercise-2-4-adding-wcs-plotting admonition">
-<p class="admonition-title">Exercise 2.4: Adding WCS Plotting</p>
+<div class="admonition-exercise-2-3-adding-wcs-plotting admonition">
+<p class="admonition-title">Exercise 2.3: Adding WCS Plotting</p>
 <p>Within your function, check if a wcs is input – if it is, we’re good to go and can safely ignore <code class="docutils literal notranslate"><span class="pre">header</span></code> (even if it is provided). If instead only <code class="docutils literal notranslate"><span class="pre">header</span></code> is provided, use the <code class="docutils literal notranslate"><span class="pre">WCS()</span></code> function to create a new wcs object from that header.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -679,8 +731,8 @@ And yet, even then, with permanent record, no measure could be made that weren�
 </div>
 </div>
 <p>If this worked correctly, when you add the header you read in from our image, you should now see the axes of your plot change from pixels to <code class="docutils literal notranslate"><span class="pre">pos.eq.ra</span></code> and <code class="docutils literal notranslate"><span class="pre">pos.eq.dec</span></code>. We’re now looking at actual on-sky coordinates! Yay!</p>
-<div class="admonition-exercise-2-5-plotting-goodies admonition">
-<p class="admonition-title">Exercise 2.5: Plotting Goodies</p>
+<div class="admonition-exercise-2-4-plotting-goodies admonition">
+<p class="admonition-title">Exercise 2.4: Plotting Goodies</p>
 <p>Within the if-blocks of your function that sets the <code class="docutils literal notranslate"><span class="pre">ax</span></code> to be a wcs projection, set the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> labels to read “Right Ascension [hms]” and “Declination [degrees]” in fontsize 15.</p>
 <p>Lastly, to polish things off, use <code class="docutils literal notranslate"><span class="pre">ax.tick_params()</span></code> to set inward, larger ticks, and increase the axis tick label size to 15.</p>
 <div class="admonition note">
@@ -727,6 +779,15 @@ And yet, even then, with permanent record, no measure could be made that weren�
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can input various types of strings and formattings for the coordinates, just be sure to specify the units as shown above. The documentation shows the various methods. You can also enter RA and DEC separately if you have them stored that way, e.g., <code class="docutils literal notranslate"><span class="pre">SkyCoord(ra=241.53,dec=7.1345,unit='deg')</span></code>.</p>
+</div>
+<div class="admonition-exercise-3-1-make-a-cutout admonition">
+<p class="admonition-title">Exercise 3.1: Make a Cutout</p>
+<p>In this case, the coordinates I set above are for NGC 4039, which is the smaller of the two galaxies in the image we’re using.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If at any point you’re trying to make a coordinate object for a well known galaxy/object, try, e.g., <code class="docutils literal notranslate"><span class="pre">coord</span> <span class="pre">=</span> <span class="pre">SkyCoord.from_name('NGC</span> <span class="pre">4038')</span></code>, and ususally that will work!</p>
+</div>
+<p>In the cell below, use the coordinate we’ve created, plus a size (use 1x1 arcminutes), and the wcs object for our image, to create a <code class="docutils literal notranslate"><span class="pre">Cutout2D</span></code> object.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
