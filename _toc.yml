@@ -11,3 +11,4 @@ chapters:
 - file: notebooks/bootcamp/FunctionalProgramming.ipynb
 - file: notebooks/bootcamp/AstronomicalImaging.ipynb
 - file: notebooks/bootcamp/MakingYourOwn.ipynb
+- file: notebooks/bootcamp/UnitTesting.ipynb
