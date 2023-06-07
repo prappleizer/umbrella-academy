@@ -378,7 +378,7 @@ document.write(`
 <p class="admonition-title"><em>Exercise 2: Init</em></p>
 <p>Make an empty file called <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> in your <code class="docutils literal notranslate"><span class="pre">myutils</span></code> (innermost) directory.</p>
 <p><em>Expert Move: Do this from the shell/command line. You can do so in one line:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">Software</span><span class="o">/</span><span class="n">MyUtils</span><span class="o">/</span><span class="n">myutils</span><span class="p">;</span> <span class="n">touch</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/Software/MyUtils/myutils<span class="p">;</span><span class="w"> </span>touch<span class="w"> </span>__init__.py
 </pre></div>
 </div>
 </div>
@@ -391,7 +391,7 @@ document.write(`
 <p class="admonition-title"><em>Exercise 5: Install!</em></p>
 <p>We’re ready to install your code! I recommend installing in <em>development mode</em>, which tells your path to point to this location where you’ve been editing (rather than copying to the <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> directory elsewhere). The advantage is that if you add/edit your package, you don’t need to <em>reinstall</em> it to access the changes, just restart any python kernels or interpreters and re-import (or use the <code class="docutils literal notranslate"><span class="pre">reload</span></code> module).</p>
 <p>Navigate your shell to the outer <code class="docutils literal notranslate"><span class="pre">MyUtils</span></code> folder (the one with your <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>) and type</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
 </div>
 <p>This should insall your package! Try opening a new shell, opening ipython, and typing</p>
