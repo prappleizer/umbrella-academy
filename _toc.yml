@@ -10,3 +10,4 @@ chapters:
 - file: notebooks/bootcamp/IntroductionToPython_2.ipynb
 - file: notebooks/bootcamp/FunctionalProgramming.ipynb
 - file: notebooks/bootcamp/AstronomicalImaging.ipynb
+- file: notebooks/bootcamp/MakingYourOwn.ipynb
