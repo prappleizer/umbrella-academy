@@ -1,0 +1,1394 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>File Input and Output (I/O) &#8212; Yale Umbrella Academy Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bootcamp/Data-IO';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Yale Summer Umbrella Academy: A Crash Course in Scientific Computing
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Python Installation and Setup for Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_1.html">A Day One Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IntroductionToPython_2.html">A Day Two Introduction to Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plotting.html">Plotting with Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionalProgramming.html">Functional Programming: Maximizing the Efficacy of Python Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AstronomicalImaging.html">Astronomical Imaging and FITS</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="MakingYourOwn.html">Making your own packages (and installing them!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnitTesting.html">Unit Testing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/prappleizer/umbrella-academy" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/prappleizer/umbrella-academy/issues/new?title=Issue%20on%20page%20%2Fnotebooks/bootcamp/Data-IO.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/bootcamp/Data-IO.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>File Input and Output (I/O)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ascii-text-files">ASCII (text files)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-have-we-learned">What have we learned?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#want-practice-with-pandas">Want practice with Pandas?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fits-flexible-image-transport-system">FITS (Flexible Image Transport System)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asdf-advanced-science-data-format">ASDF (Advanced Science Data Format)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hdf5-hierarchical-data-format-5">HDF5 (Hierarchical Data Format 5)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="file-input-and-output-i-o">
+<h1>File Input and Output (I/O)<a class="headerlink" href="#file-input-and-output-i-o" title="Permalink to this heading">#</a></h1>
+<p>In this section, we’ll discuss several of the common methods for getting the types of dataset used by astronomers into Python for analysis, and how to save our own generated (or modified) data back out. This is a core skill, because it is usually the first step in any research endeavour that is not a pure theory-based analytic calculation.</p>
+<p>As an example: let’s say you’ve found a research mentor — graduate student, postdoc, or faculty — and they have agreed to help you get started with research. Generally, this will involve two things:</p>
+<ul class="simple">
+<li><p>They will provide a (possibly overwhelming) list of papers and review articles for you to read, and</p></li>
+<li><p>They will provide some data related to the project.</p></li>
+</ul>
+<p>Then they might say something like “As you skim through these papers to get a feel for what you will be doing, try playing around with these data a bit and see if you can make a plot of X vs Y.” Or, they might say “Go online and download the Nasa Sloan Atlas and see if you can make a BPT diagram for all the galaxies with non-zero line flux.”</p>
+<p>This is where file I/O comes in. Even if you have taken a general introductory Python course online or even in the computer science department of a university, those courses will likely never have had cause to teach you how to read in a <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file, a specialized filetype which can only be interacted with via special tools. Even if your mentor provides something as simple as a text file with some columns of numbers written out (known as <code class="docutils literal notranslate"><span class="pre">ASCII</span></code>), it is likely that a function you may have learned such as \code{numpy.loadtxt()} or \code{pandas.read_csv()} won’t work on that data right “out of the box” because astronomical data in ASCII files often</p>
+<ul class="simple">
+<li><p>has missing entries</p></li>
+<li><p>have a mix of delimeters</p></li>
+<li><p>are not even formatted into clean columns.</p></li>
+</ul>
+<p>If that sounds frustrating, it is — and it’s why more constrained data formats (like <code class="docutils literal notranslate"><span class="pre">FITS</span></code>, <code class="docutils literal notranslate"><span class="pre">asdf</span></code>, or <code class="docutils literal notranslate"><span class="pre">hdf5</span></code>) are now preffered. Generally, if you can successfully <em>write</em> one of these files, adhering to their internal rules, you can <em>read</em> them back in simply and without hassle.</p>
+<p>In the following examples, I am going to demonstrate the <em>general</em> method for reading several common data formats in astronomy. This can be treated as a “cheat-sheet” in the data formats if you already know a bit of Python. If you are brand new to Python, I suggest skipping ahead to basic Python syntax and structure first, so that you can separate what is a Python-ism and what is data format related.</p>
+<section id="ascii-text-files">
+<h2>ASCII (text files)<a class="headerlink" href="#ascii-text-files" title="Permalink to this heading">#</a></h2>
+<p>The simplest (in some sense) format for data storage is the humble text file. The primary advantage of an ASCII file as a data storage format is portability; no special software is needed to read these files (in fact, any computer can do so via one of several programs, including the shell). On many computers, you can preview the contents of a text file without even opening it.</p>
+<p>Text files are also very flexible insofar is they impose no rules on how you format the information placed into a text file. As mentioned above, however, this can lead to headaches later, because decisions that make a text file read-friendly to the eye might make it impossible to parse (easily) via computer.</p>
+<p>ASCII files are so basic that even Python itself has an I/O operation that can read them in. Here is an example of that for one of the data sets you will use in the Chapter Assignment on astronomical imaging (<em>Note, this is almost never the recommended method</em>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../Imaging/relano2016_m33_apertures.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Above, I use a python-structure called a <em>context manager</em> (the “with open” formatting) simply because it allows a file to be opened, extracted, and then automatically closed again when the requisite data has been loaded. Equivalent would be:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../Imaging/relano2016_m33_apertures.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> 
+<span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> 
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at what our <code class="docutils literal notranslate"><span class="pre">data</span></code> variable looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ID,  RA,            DEC,           ap_radius, type\n1\t,01:32:32.330,+30:35:03.97,48.5,Mixed\n2\t,01:32:34.685,+30:30:27.45,40.7,Mixed\n3\t,01:32:34.687,+30:27:29.01,44.8,Mixed\n4\t,01:32:37.566,+30:40:08.76,53.2,ClearShell\n5\t,01:32:44.823,+30:34:58.75,29.5,Filled\n6\t,01:32:44.903,+30:25:10.88,60.0,ClearShell\n7\t,01:32:45.500,+30:38:55.18,47.6,Mixed\n8\t,01:32:46.135,+30:20:25.64,30.3,ClearShell\n9\t,01:32:51.918,+30:29:54.64,45.4,ClearShell\n10\t,01:32:52.458,+30:34:57.00,32.5,Shell\n11\t,01:32:52.578,+30:38:17.46,19.5,ClearShell\n12\t,01:32:53.934,+30:23:18.05,36.1,Mixed\n13\t,01:32:56.280,+30:40:34.37,39.4,Shell\n14\t,01:32:56.655,+30:27:25.20,37.4,Shell\n15\t,01:32:58.381,+30:35:58.24,28.5,Shell\n16\t,01:32:59.261,+30:44:20.36,38.3,Mixed\n17\t,01:33:00.968,+30:30:53.08,39.4,Shell\n18\t,01:33:03.079,+30:11:22.52,40.1,Mixed\n19\t,01:33:07.361,+30:42:40.20,34.7,Mixed\n20\t,01:33:08.571,+30:29:54.02,34.3,Mixed\n21\t,01:33:10.283,+30:27:24.12,41.1,ClearShell\n22\t,01:33:11.174,+30:23:20.86,39.0,Mixed\n23\t,01:33:11.303,+30:45:15.32,31.7,Filled\n24\t,01:33:12.083,+30:48:56.26,46.3,Shell\n25\t,01:33:12.188,+30:38:47.14,37.6,Mixed\n26\t,01:33:12.251,+30:34:17.32,35.0,Mixed\n27\t,01:33:14.743,+30:32:32.25,27.9,Mixed\n28\t,01:33:15.673,+30:56:40.94,60.0,Mixed\n29\t,01:33:15.870,+30:53:24.88,67.5,Mixed\n30\t,01:33:15.912,+30:44:57.64,46.5,Shell\n31\t,01:33:18.702,+30:27:05.01,40.5,Shell\n32\t,01:33:22.130,+30:26:20.43,44.1,ClearShell\n33\t,01:33:23.026,+30:50:23.31,60.0,Mixed\n34\t,01:33:24.625,+30:30:47.45,27.8,Filled\n35\t,01:33:24.933,+30:25:23.95,31.3,Filled\n36\t,01:33:25.453,+30:47:32.94,20.6,Shell\n37\t,01:33:26.787,+30:38:58.10,48.2,Shell\n38\t,01:33:27.523,+31:00:35.30,43.2,Shell\n39\t,01:33:27.549,+30:45:52.35,38.0,Shell\n40\t,01:33:28.248,+30:52:49.29,60.0,Shell\n41\t,01:33:29.375,+30:31:46.36,39.7,Mixed\n42\t,01:33:29.626,+30:40:31.43,37.0,Mixed\n43\t,01:33:30.975,+30:59:36.18,38.0,Shell\n44\t,01:33:33.209,+30:41:40.99,48.9,Mixed\n45\t,01:33:33.863,+30:37:38.97,21.5,Shell\n46\t,01:33:34.840,+30:48:35.30,40.3,Shell\n47\t,01:33:35.078,+30:37:03.04,20.4,Filled\n48\t,01:33:35.110,+31:00:54.44,60.0,ClearShell\n49\t,01:33:35.786,+30:39:32.81,37.5,Shell\n50\t,01:33:36.596,+30:50:42.94,33.7,Shell\n51\t,01:33:36.742,+30:20:06.00,35.2,Mixed\n52\t,01:33:39.232,+30:32:43.33,23.4,Mixed\n53\t,01:33:39.542,+30:38:06.13,29.9,Mixed\n54\t,01:33:42.539,+30:22:52.11,45.1,Shell\n55\t,01:33:44.164,+30:44:43.52,36.6,Mixed\n56\t,01:33:44.499,+31:02:04.51,60.0,Shell\n57\t,01:33:45.360,+30:21:38.68,30.4,Filled\n58\t,01:33:45.466,+30:36:29.63,52.3,Mixed\n59\t,01:33:46.951,+30:27:21.04,35.3,Filled\n60\t,01:33:47.819,+30:50:50.74,30.0,Shell\n61\t,01:33:49.944,+30:51:39.58,34.7,Mixed\n62\t,01:33:50.889,+30:56:35.44,34.3,Shell\n63\t,01:33:53.066,+30:39:06.70,42.2,Mixed\n64\t,01:33:54.197,+30:33:03.51,34.6,Mixed\n65\t,01:33:54.236,+30:35:28.30,32.9,Mixed\n66\t,01:33:55.314,+30:43:24.04,33.3,ClearShell\n67\t,01:33:55.680,+30:45:24.51,33.0,Mixed\n68\t,01:33:56.002,+30:19:54.11,27.6,Mixed\n69\t,01:33:56.417,+30:27:36.58,53.7,ClearShell\n70\t,01:33:56.659,+30:32:02.44,41.9,ClearShell\n71\t,01:33:57.505,+30:42:15.57,39.4,Mixed\n72\t,01:34:01.742,+30:46:32.53,23.5,ClearShell\n73\t,01:34:02.462,+30:36:27.67,34.6,Mixed\n74\t,01:34:02.764,+30:38:44.53,39.2,Mixed\n75\t,01:34:02.958,+30:51:26.34,27.8,Mixed\n76\t,01:34:03.753,+30:54:55.31,35.0,Mixed\n77\t,01:34:06.329,+30:48:54.82,26.2,Filled\n78\t,01:34:06.817,+30:41:45.58,39.8,ClearShell\n79\t,01:34:07.340,+30:47:31.72,39.2,ClearShell\n80\t,01:34:07.549,+30:33:58.71,24.3,Shell\n81\t,01:34:09.071,+31:02:00.48,43.3,Shell\n82\t,01:34:10.018,+30:31:56.11,31.8,Mixed\n83\t,01:34:10.505,+30:21:52.11,59.2,ClearShell\n84\t,01:34:10.891,+31:03:17.44,36.5,Mixed\n85\t,01:34:11.082,+30:36:10.08,39.4,Shell\n86\t,01:34:12.803,+30:52:26.74,29.2,Shell\n87\t,01:34:13.301,+31:09:14.58,60.0,ClearShell\n88\t,01:34:14.241,+31:04:44.77,34.6,Shell\n89\t,01:34:15.273,+31:10:46.66,38.9,Shell\n90\t,01:34:15.776,+30:37:10.75,50.9,Mixed\n91\t,01:34:17.115,+30:51:51.83,35.4,Mixed\n92\t,01:34:20.140,+30:44:18.73,36.5,Mixed\n93\t,01:34:21.962,+30:45:46.91,45.6,Mixed\n94\t,01:34:24.461,+30:31:13.03,22.5,ClearShell\n95\t,01:34:24.519,+30:54:50.28,30.2,Mixed\n96\t,01:34:28.949,+30:53:33.18,41.9,Shell\n97\t,01:34:30.665,+30:57:20.07,42.2,Mixed\n98\t,01:34:33.060,+30:47:01.71,74.2,Mixed\n99\t,01:34:33.726,+31:00:31.15,61.1,ClearShell\n100\t,01:34:33.890,+30:35:23.66,25.7,Mixed\n101\t,01:34:35.593,+30:42:26.99,52.9,Shell\n102\t,01:34:37.343,+30:34:52.93,32.4,Filled\n103\t,01:34:38.019,+30:57:28.13,60.0,ClearShell\n104\t,01:34:38.868,+30:44:03.03,26.7,Shell\n105\t,01:34:39.091,+31:02:27.84,39.1,Shell\n106\t,01:34:39.813,+30:41:49.57,30.3,Mixed\n107\t,01:34:41.427,+30:28:00.16,54.0,ClearShell\n108\t,01:34:41.641,+30:37:29.54,29.8,ClearShell\n109\t,01:34:42.835,+30:31:44.95,29.0,Shell\n110\t,01:34:49.060,+31:07:47.26,68.5,ClearShell\n111\t,01:34:49.718,+30:54:49.90,32.3,Mixed\n112\t,01:34:50.644,+30:36:16.59,40.2,ClearShell\n113\t,01:34:54.748,+30:41:15.45,33.2,Shell\n114\t,01:34:56.466,+30:36:34.42,23.7,ClearShell\n115\t,01:35:00.940,+30:38:16.81,39.1,ClearShell\n116\t,01:35:03.775,+30:37:08.86,37.1,ClearShell\n117\t,01:35:04.603,+30:40:52.88,47.6,Shell\n118\t,01:35:06.822,+30:41:55.06,28.6,Shell\n119\t,01:35:10.605,+30:45:24.21,39.4,ClearShell&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, it’s read a file in as a single, long string. That’s not very helpful. Try opening the Relano file using a program on your computer (like Notepad on a PC, or with Preview on a Mac). Notice that our string here contains things that don’t seem to be in the file! Things like “\n2” or “\t”. These are <em>formatting</em> tags, and they are the structure formatting for ASCII. For example, “\t” indicates there is a tab-spacing between two entries, and “\n” indicates a new line in the file.</p>
+<p>While we could use those formatting tags to construct a set of code that parses this string into actual data we care about, it is instead better to use one of several libraries that have functions directly related to this purpose.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">numpy</span></code> library has two functions useful for this: <code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code> and <code class="docutils literal notranslate"><span class="pre">np.genfromtxt</span></code>. If you have a very simple text file with columns of numbers and no mix of data types, <code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code> is probably fine. But in many cases, <code class="docutils literal notranslate"><span class="pre">np.genfromtxt</span></code> is more flexible. Let’s try it out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;../Imaging/relano2016_m33_apertures.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;../Imaging/relano2016_m33_apertures.txt&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/theia/lib/python3.10/site-packages/numpy/lib/npyio.py:2291,</span> in <span class="ni">genfromtxt</span><span class="nt">(fname, dtype, comments, delimiter, skip_header, skip_footer, converters, missing_values, filling_values, usecols, names, excludelist, deletechars, replace_space, autostrip, case_sensitive, defaultfmt, unpack, usemask, loose, invalid_raise, max_rows, encoding, ndmin, like)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2289</span> <span class="c1"># Raise an exception ?</span>
+<span class="g g-Whitespace">   </span><span class="mi">2290</span> <span class="k">if</span> <span class="n">invalid_raise</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2291</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2292</span> <span class="c1"># Issue a warning ?</span>
+<span class="g g-Whitespace">   </span><span class="mi">2293</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2294</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">errmsg</span><span class="p">,</span> <span class="n">ConversionWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: Some errors were detected !
+    <span class="n">Line</span> <span class="c1">#2 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#3 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#4 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#5 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#6 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#7 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#8 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#9 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#10 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#11 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#12 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#13 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#14 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#15 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#16 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#17 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#18 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#19 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#20 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#21 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#22 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#23 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#24 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#25 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#26 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#27 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#28 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#29 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#30 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#31 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#32 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#33 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#34 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#35 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#36 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#37 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#38 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#39 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#40 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#41 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#42 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#43 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#44 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#45 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#46 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#47 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#48 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#49 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#50 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#51 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#52 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#53 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#54 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#55 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#56 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#57 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#58 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#59 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#60 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#61 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#62 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#63 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#64 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#65 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#66 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#67 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#68 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#69 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#70 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#71 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#72 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#73 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#74 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#75 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#76 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#77 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#78 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#79 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#80 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#81 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#82 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#83 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#84 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#85 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#86 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#87 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#88 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#89 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#90 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#91 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#92 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#93 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#94 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#95 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#96 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#97 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#98 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#99 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#100 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#101 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#102 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#103 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#104 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#105 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#106 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#107 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#108 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#109 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#110 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#111 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#112 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#113 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#114 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#115 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#116 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#117 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#118 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#119 (got 2 columns instead of 5)</span>
+    <span class="n">Line</span> <span class="c1">#120 (got 2 columns instead of 5)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ouch! We got a bunch of errors! This is because <code class="docutils literal notranslate"><span class="pre">np.genfromtxt</span></code> doesn’t know the format of the file and doesn’t have a strong engine for making guesses. We have to instead provide several extra arguments to the function to tell it out our data looks:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;../Imaging/relano2016_m33_apertures.txt&#39;</span><span class="p">,</span>
+                     <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you look directly at the text file we’re working with, you’ll notice that the first row contains names for each column — we want to skip this row when reading in the data because it will (usually) be a different data type (str) than the data in the column below it. Additionally, we had to specify that the delimeter between entries in a row is a comma. But now we should have a reasonable array of data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1. ,  nan,  nan, 48.5,  nan],
+       [ 2. ,  nan,  nan, 40.7,  nan],
+       [ 3. ,  nan,  nan, 44.8,  nan],
+       [ 4. ,  nan,  nan, 53.2,  nan],
+       [ 5. ,  nan,  nan, 29.5,  nan]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oh dear…. most of the data has been read in as a <code class="docutils literal notranslate"><span class="pre">NaN</span></code> — “Not a Number”. The reason for this is that we have a mix of data types in our file – the RA, DEC, and “type” columns are all technically strings, and only the <code class="docutils literal notranslate"><span class="pre">ap_radius</span></code> column is a decimal valued number (known as a float), which is what numpy expects by default.</p>
+<p>As it turns out, we can also specify the data types for each individual column upon loading the file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s1">&#39;../Imaging/relano2016_m33_apertures.txt&#39;</span><span class="p">,</span>
+                     <span class="n">skip_header</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span>
+                     <span class="n">dtype</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="s1">&#39;&lt;U25&#39;</span><span class="p">,</span><span class="s1">&#39;&lt;U25&#39;</span><span class="p">,</span><span class="nb">float</span><span class="p">,</span><span class="s1">&#39;&lt;U25&#39;</span><span class="p">))</span>
+<span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([(1, &#39;01:32:32.330&#39;, &#39;+30:35:03.97&#39;, 48.5, &#39;Mixed&#39;),
+       (2, &#39;01:32:34.685&#39;, &#39;+30:30:27.45&#39;, 40.7, &#39;Mixed&#39;),
+       (3, &#39;01:32:34.687&#39;, &#39;+30:27:29.01&#39;, 44.8, &#39;Mixed&#39;),
+       (4, &#39;01:32:37.566&#39;, &#39;+30:40:08.76&#39;, 53.2, &#39;ClearShell&#39;),
+       (5, &#39;01:32:44.823&#39;, &#39;+30:34:58.75&#39;, 29.5, &#39;Filled&#39;)],
+      dtype=[(&#39;f0&#39;, &#39;&lt;i8&#39;), (&#39;f1&#39;, &#39;&lt;U25&#39;), (&#39;f2&#39;, &#39;&lt;U25&#39;), (&#39;f3&#39;, &#39;&lt;f8&#39;), (&#39;f4&#39;, &#39;&lt;U25&#39;)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Horray! We finally got the data into Python (in at least what appears to be a sensible way). Above, I specified that columns 1 and 4 were <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">float</span></code> while the others is a way of saying “A string less than 25 characters”.</p>
+<p>Are we finished? Unfortunately, no. The <code class="docutils literal notranslate"><span class="pre">numpy</span></code> library is not well-designed to handle this type of heterogeneous data, and is currently storing it as a structured array, for which we cannot easily access columns or perform operations (like choosing just rows with radii greater than some value).</p>
+<p>We could loop through this array and ultimately place each column into a different list, then start indexing. But it turns out there was (all along) a best tool for the job: <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p>
+<p>The pandas library will be covered more later, but in short, it is a data-science oriented library with tools well-suited to the (often) heterogeneous datasets seen in industry. It also has some logic built in to try to figure out the structure of a dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../Imaging/relano2016_m33_apertures.txt&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>RA</th>
+      <th>DEC</th>
+      <th>ap_radius</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>01:32:32.330</td>
+      <td>+30:35:03.97</td>
+      <td>48.5</td>
+      <td>Mixed</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>01:32:34.685</td>
+      <td>+30:30:27.45</td>
+      <td>40.7</td>
+      <td>Mixed</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>01:32:34.687</td>
+      <td>+30:27:29.01</td>
+      <td>44.8</td>
+      <td>Mixed</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>01:32:37.566</td>
+      <td>+30:40:08.76</td>
+      <td>53.2</td>
+      <td>ClearShell</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>01:32:44.823</td>
+      <td>+30:34:58.75</td>
+      <td>29.5</td>
+      <td>Filled</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As we can see, with almost no effort at all, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> read our data into a table, deftly figuring out the column headings and parsing the heterogeneous data types. We can now get the radii out easily, or indeed, find all rows with a radius bigger than some value. There is only one thing that pandas did <em>incorrectly</em> which we do have to fix: Our delimeter in our file is a comma, but there are many spaces in the header row designed, it seems, to make it easier to see which column heading goes with each column. <code class="docutils literal notranslate"><span class="pre">pandas</span></code> didn’t know to strip those spaces, so if we actually print the column names, we’ll see the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;ID&#39;, &#39;  RA&#39;, &#39;            DEC&#39;, &#39;           ap_radius&#39;, &#39; type&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need to remove these spaces or we won’t be able to easily index out the columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../Imaging/relano2016_m33_apertures.txt&#39;</span><span class="p">,</span>
+                   <span class="n">skipinitialspace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;ID&#39;, &#39;RA&#39;, &#39;DEC&#39;, &#39;ap_radius&#39;, &#39;type&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code> function has <em>many</em> optional arguments that lets us set up for different data. Here, I’ve used the “skipinitialspace” argument to tell it to strip out those leading spaces. Now, with this (still relatively easy) line of code, we can perform our data analysis:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">ap_radius</span><span class="o">&gt;</span><span class="mi">55</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>RA</th>
+      <th>DEC</th>
+      <th>ap_radius</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>01:32:44.903</td>
+      <td>+30:25:10.88</td>
+      <td>60.0</td>
+      <td>ClearShell</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>28</td>
+      <td>01:33:15.673</td>
+      <td>+30:56:40.94</td>
+      <td>60.0</td>
+      <td>Mixed</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>29</td>
+      <td>01:33:15.870</td>
+      <td>+30:53:24.88</td>
+      <td>67.5</td>
+      <td>Mixed</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>33</td>
+      <td>01:33:23.026</td>
+      <td>+30:50:23.31</td>
+      <td>60.0</td>
+      <td>Mixed</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>40</td>
+      <td>01:33:28.248</td>
+      <td>+30:52:49.29</td>
+      <td>60.0</td>
+      <td>Shell</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>48</td>
+      <td>01:33:35.110</td>
+      <td>+31:00:54.44</td>
+      <td>60.0</td>
+      <td>ClearShell</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>56</td>
+      <td>01:33:44.499</td>
+      <td>+31:02:04.51</td>
+      <td>60.0</td>
+      <td>Shell</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>83</td>
+      <td>01:34:10.505</td>
+      <td>+30:21:52.11</td>
+      <td>59.2</td>
+      <td>ClearShell</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>87</td>
+      <td>01:34:13.301</td>
+      <td>+31:09:14.58</td>
+      <td>60.0</td>
+      <td>ClearShell</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>98</td>
+      <td>01:34:33.060</td>
+      <td>+30:47:01.71</td>
+      <td>74.2</td>
+      <td>Mixed</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>99</td>
+      <td>01:34:33.726</td>
+      <td>+31:00:31.15</td>
+      <td>61.1</td>
+      <td>ClearShell</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>103</td>
+      <td>01:34:38.019</td>
+      <td>+30:57:28.13</td>
+      <td>60.0</td>
+      <td>ClearShell</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>110</td>
+      <td>01:34:49.060</td>
+      <td>+31:07:47.26</td>
+      <td>68.5</td>
+      <td>ClearShell</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Above, for example, I’ve <em>filtered</em> the DataFrame for only rows where the aperture radius is greater than 55 arcseconds.</p>
+<section id="what-have-we-learned">
+<h3>What have we learned?<a class="headerlink" href="#what-have-we-learned" title="Permalink to this heading">#</a></h3>
+<p>When it comes to ASCII text files, this is only the beginning. These read-text functions have numerous extra optional parameters because many text files are in fact much more complicated and headache-inducing than this one. What I want you to takeaway is:</p>
+<ul class="simple">
+<li><p>Sometimes, one tool/reader will be better suited to your data than another and can help reduce the time it takes to get data imported,</p></li>
+<li><p>Indeed, sometimes using one tool to <em>load</em> the data, then converting it to another data container of choice (say, from <code class="docutils literal notranslate"><span class="pre">pandas</span></code> to \code{numpy}) can be a good trick,</p></li>
+<li><p>Sometimes, but not always, simply modifying the underlying text file in a notepad-like program first can make it easier to read (for example, adding a comma delimeter).</p></li>
+</ul>
+</section>
+</section>
+<section id="want-practice-with-pandas">
+<h2>Want practice with Pandas?<a class="headerlink" href="#want-practice-with-pandas" title="Permalink to this heading">#</a></h2>
+<p>Try out this lab: <a class="reference external" href="https://astro-330.github.io/Lab6/Lab6.html">https://astro-330.github.io/Lab6/Lab6.html</a></p>
+</section>
+<section id="fits-flexible-image-transport-system">
+<h2>FITS (Flexible Image Transport System)<a class="headerlink" href="#fits-flexible-image-transport-system" title="Permalink to this heading">#</a></h2>
+<p>Thankfully, from here on out, things are going to get simpler. We are moving to data formats where in order to <em>write</em> a file in the first place, it must follow rules that make it <em>readable</em>. Astronomical images and data tables are very often stored in what are known as “fits files”. It’s a stable standard that has been around for a long time. Reading fits files is relatively simple, as the \code{astropy} library has a module dedicated to the purpose:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="k">with</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;../../BookDatasets/imaging/m33-halpha.fits&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">hdu</span><span class="p">:</span> 
+    <span class="n">image</span> <span class="o">=</span> <span class="n">hdu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> 
+    <span class="n">header</span> <span class="o">=</span> <span class="n">hdu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I’ve used the same context manager format as we did above, but instead of Python’s <code class="docutils literal notranslate"><span class="pre">open()</span></code>, I’ve used the <code class="docutils literal notranslate"><span class="pre">fits.open()</span></code> function in astropy. Let’s talk briefly about how <code class="docutils literal notranslate"><span class="pre">FITS</span></code> files are organized.</p>
+<p>Internally, a <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file is organized into <em>extensions</em>. You can think of these as different containers in which different things can be stored. Many fits files only use one extension (say, to store a single image). But a <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file containing a whole survey catalog may utilize multiple extensions to store different tables, such as one for each field of the survey.</p>
+<p>When we read a <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file into an object, it is iterable (or list-like), meaning we access the different extensions by indexing (above I only use the 0th index for the first extension). Each extension (container) has two attributes: data, and a header. The data is, as it sounds, whatever data we have stored. Generally, it is either image-like (as in, an array of numbers) or tabular (there is a specific internal formatting to handle column names, data types, etc). The header, meanwhile, can be thought of as the metadata — it usually contains information about whatever is stored in the data attribute (sometimes critical information for parsing that data). For example, image data usually have headers with information like the exposure time, telescope name, RA and DEC where the telescope was pointing, what filter was used, etc. For our Python purposes, a header gets read into the dictionary format, with keys and values.</p>
+<p>You might be wondering why I chose the name <code class="docutils literal notranslate"><span class="pre">hdu</span></code> when reading in the file. As each extension contains a header and some data, the standard name for one is “header data unit,” or hdu. Above, we could’ve used any name. But knowing what HDU means is useful because if we were to <em>write</em> a <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file, we’d need to do something like the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">save_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">save_array</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;IMSHAPE&#39;</span><span class="p">:</span><span class="s1">&#39;10 x 10&#39;</span><span class="p">})</span>
+<span class="n">hdu</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;some_name.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, the way to make an hdu to save a new <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file is to call <code class="docutils literal notranslate"><span class="pre">fits.PrimaryHDU()</span></code>, to which we passed the data array and a dictionary, which will be put in the header. And if we need multiple extensions, we would create a <code class="docutils literal notranslate"><span class="pre">fits.HDUList()</span></code>, containing a <code class="docutils literal notranslate"><span class="pre">fits.PrimaryHDU()</span></code> and possibly some additional <code class="docutils literal notranslate"><span class="pre">fits.ImageHDU()</span></code>’s.</p>
+<p>For non-tabular <code class="docutils literal notranslate"><span class="pre">FITS</span></code> files, the <code class="docutils literal notranslate"><span class="pre">image</span></code> variable above will just be a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array, and the <code class="docutils literal notranslate"><span class="pre">header</span></code> will just be a dictionary. For a much deeper dive into what to do from here if working with an image, see the workbook on Astronomical Imaging.</p>
+<p>How about if tabular data were stored?</p>
+<p>By convention, tabular data begins being stored in the 1st, rather than 0th extension. Tables are thus stored after the image, or if there is no image, the 0th extension is empty. Tabular data, if parsed directly using the format above will be a special <code class="docutils literal notranslate"><span class="pre">FITS</span></code> record array. Let’s as an example load the Nasa Sloan Atlas, which you’ll be using later in the text.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;../../BookDatasets/catalogs/nsa_v0_1_2.fits&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">hdu</span><span class="p">:</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">hdu</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unfortunately, there’s no easy way to display this table in a view-friendly format. Here’s a truncated peak:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;J094651.40-010228.5&#39;, &#39;09h/m00/J094651.40-010228.5&#39;, 146.71420878660933, -1.0412815695754145, 0, 72212, 21157, -1, -1, -1, 15.178774, 0.021222278, &#39;sdss&#39;, 0.07, 756, 1, 206, &#39;301&#39;, 136.29353, 1095.152, 0.020597626, 0.020687785, 0.00044536332, 0, array([  29.552263,   53.198177,  175.86322 ,  819.325   , 1793.9138  ,
+       2480.876   , 3251.03    ], dtype=float32), array([3.0069932e-01, 1.9650683e-01, 1.4631173e-02, 4.3475279e-03,
+       9.1012771e-04, 4.7585298e-04, 1.2297294e-04], dtype=float32), 1, array([  31.202734,   49.386097,  199.0066  ,  824.0366  , 1712.252   ,
+       2462.11    , 3454.6162  ], dtype=float32), array([-15.1673565, -15.816648 , -17.190884 , -18.824028 , -19.66704  ,
+       -20.00378  , -20.296247 ], dtype=float32), array([ 222.77438,  471.76144,  383.8668 , 2475.7463 , 2484.602  ,
+       2484.4727 , 1102.5615 ], dtype=float32), array([0.4536473 , 0.44762787, 0.2820931 , 0.20756142, 0.15054086,
+       0.11415057, 0.08093417], dtype=float32), array([-0.00607499,  0.00494833,  0.08098889,  0.0434305 ,  0.03558178,
+        0.02031052,  0.01923862], dtype=float32), array([1.7146798e-04, 1.0891152e-08, 1.3611655e-05, 2.1125154e-04,
+       2.5712407e-12], dtype=float32), array([2.0710815e-04, 4.5361793e-01, 2.8789890e+00, 2.3098803e+00,
+       1.7403587e+00, 1.3614385e+00, 9.9210894e-01], dtype=float32), 2.7482898e-05, 0.30352896, 0.034775626, 8815395000.0, 203.33877563476562, 266.452880859375, array([ 0.3149959 ,  0.55292106,  0.73613924,  4.4439607 , 10.582797  ,
+       15.851852  , 22.908411  ], dtype=float32), array([[ 3.1499591e-01,  5.5292106e-01,  7.3613924e-01,  4.4439607e+00,
+         1.0582797e+01,  1.5851852e+01,  2.2908411e+01],
+       [ 3.1215706e-01,  4.8534787e-01,  6.9371903e-01,  3.8997362e+00,
+         9.1883869e+00,  1.3752110e+01,  1.9739365e+01],
+       [ 2.2424848e-01,  3.7450430e-01,  5.5945641e-01,  2.9711497e+00,
+         6.7689247e+00,  1.0280761e+01,  1.4645969e+01],
+       [ 1.4835103e-01,  2.2157311e-01,  3.8334239e-01,  1.7905129e+00,
+         3.9291470e+00,  5.9650722e+00,  8.2733326e+00],
+       [ 4.1471288e-02,  6.7831859e-02,  1.9137704e-01,  8.1698632e-01,
+         1.7376291e+00,  2.5609708e+00,  3.4443357e+00],
+       [ 1.5179159e-02,  2.3273496e-02,  1.1710234e-01,  4.3912709e-01,
+         8.6518300e-01,  1.2332901e+00,  1.6239778e+00],
+       [ 4.3435390e-03,  6.2486250e-03,  4.8242450e-02,  1.7172834e-01,
+         3.2213667e-01,  4.5530882e-01,  5.8791780e-01],
+       [ 1.4110035e-03,  1.2044052e-03,  1.2765656e-02,  5.0816964e-02,
+         9.4596170e-02,  1.3518794e-01,  1.6866270e-01],
+       [ 9.5461012e-04,  3.6265393e-04,  7.2990935e-03,  2.4691641e-02,
+         4.3752514e-02,  6.4059064e-02,  7.7437676e-02],
+       [ 5.0664792e-04, -7.1094066e-05,  2.9638670e-03,  6.7447238e-03,
+         1.1328476e-02,  1.7579153e-02,  2.1971365e-02],
+       [ 0.0000000e+00,  0.0000000e+00,  1.2374972e-03,  1.0021310e-03,
+         1.3387474e-03,  3.2007305e-03,  2.3603411e-03],
+       [ 0.0000000e+00,  0.0000000e+00,  1.4736446e-03,  4.4089637e-04,
+         7.2401989e-04,  1.5145855e-03,  9.6406962e-05],
+       [ 0.0000000e+00,  0.0000000e+00,  0.0000000e+00,  0.0000000e+00,
+         0.0000000e+00,  0.0000000e+00,  0.0000000e+00],
+       [ 0.0000000e+00,  0.0000000e+00,  0.0000000e+00,  0.0000000e+00,
+         0.0000000e+00,  0.0000000e+00,  0.0000000e+00],
+       [ 0.0000000e+00,  0.0000000e+00,  0.0000000e+00,  0.0000000e+00,
+         0.0000000e+00,  0.0000000e+00,  0.0000000e+00]], dtype=float32), array([[ 233.37904 ,  408.61783 ,  635.4861  ,  474.38293 ,  129.64206 ,
+          60.10434 ,   13.010243],
+       [ 143.7284  ,  299.13757 ,  425.06302 ,  362.47797 ,  102.3743  ,
+          47.753185,    9.861989],
+       [ 194.82495 ,  369.69064 ,  475.0112  ,  484.496   ,  150.6254  ,
+          68.71571 ,   12.979028],
+       [ 275.33157 ,  580.7845  ,  575.7663  ,  809.8434  ,  283.35046 ,
+         129.02849 ,   21.130802],
+       [ 790.7647  , 1522.6487  ,  703.24817 , 1617.9415  ,  641.0504  ,
+         295.6741  ,   38.254032],
+       [1320.061   , 2927.7256  ,  857.38745 , 2478.7932  , 1097.3617  ,
+         473.77917 ,   53.512966],
+       [1661.8989  , 4392.87    , 1047.7224  , 3761.1538  , 1700.484   ,
+         721.3159  ,   68.30907 ],
+       [1808.1543  , 5103.9707  , 1180.4182  , 4886.4336  , 2138.5469  ,
+         923.67993 ,   77.150055],
+       [1823.2478  , 5274.482   ,  590.8859  , 5363.67    , 2183.3352  ,
+        1004.4031  ,   68.289734],
+       [1897.7526  , 5449.1265  , 1030.3646  , 5809.598   , 2568.739   ,
+        1066.3997  ,   80.45908 ],
+       [   0.      ,    0.      ,  820.0565  , 5895.0815  , 2695.1965  ,
+        1063.0568  ,   10.088982],
+       [   0.      ,    0.      ,  719.25415 , 3709.0652  , 1942.1951  ,
+         994.91504 ,   34.321796],
+       [   0.      ,    0.      ,    0.      ,    0.      ,    0.      ,
+           0.      ,    0.      ],
+       [   0.      ,    0.      ,    0.      ,    0.      ,    0.      ,
+           0.      ,    0.      ],
+       [   0.      ,    0.      ,    0.      ,    0.      ,    0.      ,
+           0.      ,    0.      ]], dtype=float32), array([[ 6.22157194e-02,  9.33686271e-03, -7.86471122e-04,
+        -2.61405390e-03, -7.56347436e-04, -7.04687729e-04,
+         1.08652923e-03],
+       [ 1.11178271e-01,  6.06432650e-03, -7.18956441e-03,
+        -1.10009471e-02, -5.60998823e-03, -4.02973127e-03,
+        -1.68029059e-04],
+       [ 3.06400359e-02, -2.40056477e-02, -2.04776283e-02,
+        -2.00813431e-02, -1.35486759e-02, -1.17908977e-02,
+        -1.13049867e-02],
+       [-6.24807775e-02, -7.41756186e-02, -5.70364706e-02,
+        -4.58293147e-02, -3.70767303e-02, -3.52988914e-02,
+        -3.24854106e-02],
+       [-7.11285919e-02, -1.03021465e-01, -7.12232366e-02,
+        -5.64803965e-02, -4.93816100e-02, -4.91589680e-02,
+        -4.68545668e-02],
+       [-1.06936090e-01, -1.10835090e-01, -8.41892138e-02,
+        -6.65039569e-02, -5.99188469e-02, -5.84271513e-02,
+        -5.57734109e-02],
+       [-1.29262090e-01, -1.47708356e-01, -1.26093149e-01,
+        -1.04325205e-01, -9.24050808e-02, -8.75774324e-02,
+        -8.59293714e-02],
+       [-1.08529143e-01, -1.46478087e-01, -1.01154871e-01,
+        -9.72791240e-02, -8.95083100e-02, -8.60144049e-02,
+        -8.44495296e-02],
+       [-1.41877994e-01, -1.91758811e-01, -1.26292408e-01,
+        -1.25059411e-01, -1.15912065e-01, -1.10286295e-01,
+        -1.10120840e-01],
+       [-1.54099330e-01, -1.90973148e-01, -1.55293301e-01,
+        -1.49166510e-01, -1.36784032e-01, -1.30457267e-01,
+        -1.28606901e-01],
+       [ 0.00000000e+00,  0.00000000e+00, -1.25241369e-01,
+        -1.50615692e-01, -1.38796180e-01, -1.30278856e-01,
+        -1.34358704e-01],
+       [ 0.00000000e+00,  0.00000000e+00, -2.15396304e-02,
+        -1.42557845e-01, -1.32487714e-01, -1.15793161e-01,
+        -1.10440403e-01],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         0.00000000e+00],
+       [-1.63731143e-01, -1.77130356e-01, -7.15356097e-02,
+        -1.45254180e-01, -1.27084792e-01, -1.08306952e-01,
+        -5.77427149e-02]], dtype=float32), array([[ 6.1461644e-04,  2.6398376e-04, -1.3578961e-04, -1.0248927e-04,
+        -8.2066908e-06, -2.9884388e-05,  2.3550657e-04],
+       [ 5.1647974e-03,  1.6162490e-03, -7.6863002e-03, -3.8894503e-03,
+        -5.3735258e-04, -1.8921234e-03,  7.4022086e-03],
+       [-2.3132665e-02, -3.2899727e-03, -2.3108495e-02, -1.0464866e-02,
+        -3.5607540e-03, -6.0002455e-03,  9.4576431e-03],
+       [-6.9569878e-02, -1.0726762e-02, -4.0541671e-02, -2.6550524e-02,
+        -1.8463362e-02, -1.5796445e-02,  4.0526954e-03],
+       [-5.7665344e-02, -7.9207951e-03, -4.2528827e-02, -3.2491535e-02,
+        -2.9027581e-02, -2.7137144e-02, -1.1222055e-02],
+       [-1.2106309e-01, -5.9129663e-02, -3.9849598e-02, -3.7773706e-02,
+        -3.6879569e-02, -3.6052208e-02, -2.2661224e-02],
+       [-1.8133904e-01, -1.0357517e-01, -7.4756779e-02, -6.8948492e-02,
+        -6.3438602e-02, -6.0404994e-02, -4.7972083e-02],
+       [-1.8610723e-01, -1.1214035e-01, -6.8357989e-02, -6.5231383e-02,
+        -6.3213304e-02, -6.0755555e-02, -5.3678863e-02],
+       [-1.4104055e-01, -9.3614489e-02, -1.1155423e-01, -1.0616606e-01,
+        -9.7839780e-02, -9.3921371e-02, -9.0520568e-02],
+       [-8.6252131e-02, -1.1681863e-01, -1.1933309e-01, -1.5240832e-01,
+        -1.3933022e-01, -1.3296410e-01, -1.3074838e-01],
+       [ 0.0000000e+00,  0.0000000e+00, -8.1681512e-02, -1.5683806e-01,
+        -1.4617878e-01, -1.3743609e-01, -1.3544711e-01],
+       [ 0.0000000e+00,  0.0000000e+00, -3.2976244e-02, -1.4365858e-01,
+        -1.4001539e-01, -1.3217406e-01, -1.3628604e-01],
+       [ 0.0000000e+00,  0.0000000e+00,  0.0000000e+00,  0.0000000e+00,
+         0.0000000e+00,  0.0000000e+00,  0.0000000e+00],
+       [ 0.0000000e+00,  0.0000000e+00,  0.0000000e+00,  0.0000000e+00,
+         0.0000000e+00,  0.0000000e+00,  0.0000000e+00],
+       [-6.8403520e-02, -1.8001024e-01, -4.5328241e-02, -1.3134067e-01,
+        -1.4120531e-01, -1.4075850e-01, -1.3205947e-01]], dtype=float32), array([[0.88285136, 0.98149174, 0.99840504, 0.9947815 , 0.9984884 ,
+        0.9985903 , 0.99777895],
+       [0.799697  , 0.98752624, 0.9791698 , 0.9769326 , 0.98879176,
+        0.9911358 , 0.9853006 ],
+       [0.92605513, 0.95268637, 0.9400973 , 0.95571375, 0.9723695 ,
+        0.9738858 , 0.97094935],
+       [0.82897544, 0.8605565 , 0.8691989 , 0.89939886, 0.9204555 ,
+        0.92553526, 0.93660104],
+       [0.83222795, 0.81270164, 0.8467997 , 0.8776534 , 0.8916442 ,
+        0.89366716, 0.90806973],
+       [0.7218684 , 0.77679634, 0.829585  , 0.8579023 , 0.8685322 ,
+        0.8715116 , 0.8864341 ],
+       [0.6357325 , 0.6943353 , 0.7443057 , 0.7776979 , 0.7984229 ,
+        0.8076828 , 0.82080823],
+       [0.6454944 , 0.6885107 , 0.7823937 , 0.7903093 , 0.80248475,
+        0.80945086, 0.8180732 ],
+       [0.6665909 , 0.6482752 , 0.7115879 , 0.71814525, 0.7365865 ,
+        0.7469392 , 0.7504701 ],
+       [0.6998192 , 0.63416183, 0.6724536 , 0.6484541 , 0.6732893 ,
+        0.6859491 , 0.69004834],
+       [1.        , 1.        , 0.7398513 , 0.6427818 , 0.6644815 ,
+        0.6815615 , 0.679567  ],
+       [1.        , 1.        , 0.92420983, 0.66335785, 0.67678   ,
+        0.70108324, 0.7015245 ],
+       [1.        , 1.        , 1.        , 1.        , 1.        ,
+        1.        , 1.        ],
+       [1.        , 1.        , 1.        , 1.        , 1.        ,
+        1.        , 1.        ],
+       [0.6985924 , 0.5967494 , 0.8438488 , 0.6724794 , 0.6807114 ,
+        0.6983631 , 0.7480506 ]], dtype=float32), array([[  0.28299746,   0.8097542 , -85.102036  , -88.87738   ,
+        -89.68916   , -88.78583   ,   6.114876  ],
+       [  1.3298844 ,   7.4617176 , -66.54375   , -80.26433   ,
+        -87.264305  , -77.42401   ,  45.650192  ],
+       [-18.526066  , -86.098114  , -65.7729    , -76.23745   ,
+        -82.6375    , -76.5145    ,  70.04224   ],
+       [-65.963524  , -85.885666  , -72.29734   , -74.95739   ,
+        -76.76388   , -77.94561   ,  86.44443   ],
+       [-70.483826  , -87.801735  , -74.57886   , -75.044716  ,
+        -74.77603   , -75.550026  , -83.26546   ],
+       [-65.72723   , -75.96021   , -77.33511   , -75.20189   ,
+        -74.194016  , -74.161766  , -78.94383   ],
+       [-62.741016  , -72.48066   , -74.66879   , -73.26965   ,
+        -72.76467   , -72.702354  , -75.41326   ],
+       [-60.12438   , -71.28157   , -72.97507   , -73.07791   ,
+        -72.38459   , -72.38242   , -73.77932   ],
+       [-67.58479   , -76.98945   , -69.272896  , -69.83562   ,
+        -69.916374  , -69.79091   , -70.2897    ],
+       [-75.381744  , -74.272896  , -71.23      , -67.19206   ,
+        -67.23583   , -67.22738   , -67.263466  ],
+       [  0.        ,   0.        , -73.44395   , -66.920296  ,
+        -66.75801   , -66.7343    , -67.38444   ],
+       [  0.        ,   0.        , -61.576008  , -67.38983   ,
+        -66.708824  , -65.610245  , -64.50992   ],
+       [  0.        ,   0.        ,   0.        ,   0.        ,
+          0.        ,   0.        ,   0.        ],
+       [  0.        ,   0.        ,   0.        ,   0.        ,
+          0.        ,   0.        ,   0.        ],
+       [-78.66291   , -67.269     , -73.81989   , -68.93986   ,
+        -65.993614  , -63.788284  , -56.808624  ]], dtype=float32), array([  18.20807 ,   28.650707,  143.92694 ,  582.349   , 1173.0132  ,
+       1709.669   , 2266.657   ], dtype=float32), array([1.9946122 , 4.039542  , 0.20086305, 0.94572484, 0.39204565,
+       0.17428693, 0.01563295], dtype=float32), array([  1.0260136,   1.5393391,  22.531082 , 115.94242  , 263.1634   ,
+       398.40118  , 563.82434  ], dtype=float32), array([ 47.339676 , 105.975204 ,  11.7503   ,  12.554992 ,   3.9354858,
+         1.8034574,   0.3339262], dtype=float32), 0.8845921, 15.40155, 0.8016074, 17.53331, array([  19.459507,   35.224564,  131.20119 ,  684.27655 , 1576.1052  ,
+       2291.6318  , 3130.742   ], dtype=float32), array([1.0776075 , 1.8280678 , 0.65176946, 0.64248854, 0.19143192,
+       0.08979373, 0.01723353], dtype=float32), 4.7782097, 0.6645174, 16.040314, array([-0.03511749,  0.03008042, -0.05094492,  0.01464257,  0.01024179,
+        0.00601335,  0.00774814], dtype=float32), array([ 0.05221656,  0.07426106, -0.00603598,  0.08903063,  0.10644455,
+        0.07196727,  0.05925424], dtype=float32), array([0, 0, 0, 0, 0, 0, 0], dtype=int32), 0, 30, &#39;v2_1_5&#39;, array([2.2341923e-01, 6.7025733e-01, 1.0238351e+00, 1.7449590e+00,
+       2.9723973e+00, 4.5841761e+00, 7.3592768e+00, 1.1306418e+01,
+       1.8019548e+01, 2.7922022e+01, 4.3770184e+01, 6.8307442e+01,
+       1.0672957e+02, 1.6652217e+02, 2.5839001e+02], dtype=float32), 7.2478933, 3.4641922, 10.453795, 5.845999, 26600130, 266, 1, 51630, array([4.1058846e+00, 1.1507167e-05, 2.1699800e-01, 1.8318444e-02,
+       1.7086830e-02, 1.9758308e-43, 1.1210388e-43], dtype=float32), 131.86357, 1.6750895, 0.01734476, 0.086800694, 0.0124226315, 269.2588, 17.046213, 2.474215, 0.23574898, 123.141365, 7.7632475, 0.68473977, 584.5531, 13.858368, 5.2918415, 0.2084552, 141.25987, 5.8739424, 294.05807, 13.240504, 2.6620486, 0.16082057, 128.46378, 9.59668, 147.91853, 15.076868, 1.5249467, 0.12158316, 122.40449, 14.56363, 22.092758, 12.022614, 0.20646292, 0.13632269, 103.73506, 30.22204, -9999.0, -9999.0, -9999.0, -9999.0, -9999.0, -9999.0, 112.33277, 12.699974, 1.195764, 0.17837653, 125.590454, 9.01761, 4.145629, 0.39556292, -0.8991989, 0.43246344, 0.009395278, 0.5594772, -9999.0, -9999.0, 0.96117455, 35.6447, 146.7141910489815, -1.0412763864732957, 0.021222278, &#39;sdss&#39;, &#39;legacy&#39;, &#39;good&#39;, 122, 146.71421, -1.0413043)
+</pre></div>
+</div>
+</div>
+</div>
+<p>A lot of this issue here is that this table has many columns and rows. A better way to load a table that has been stored in a <code class="docutils literal notranslate"><span class="pre">FITS</span></code> file is via the <code class="docutils literal notranslate"><span class="pre">astropy</span></code> Table object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span> 
+<span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;../../BookDatasets/catalogs/nsa_v0_1_2.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><i>Table length=2</i>
+<table id="table140225888887440" class="table-striped table-bordered table-condensed">
+<thead><tr><th>IAUNAME</th><th>SUBDIR</th><th>RA</th><th>DEC</th><th>ISDSS</th><th>INED</th><th>ISIXDF</th><th>IALFALFA</th><th>IZCAT</th><th>ITWODF</th><th>MAG</th><th>Z</th><th>ZSRC</th><th>SIZE</th><th>RUN</th><th>CAMCOL</th><th>FIELD</th><th>RERUN</th><th>XPOS</th><th>YPOS</th><th>ZLG</th><th>ZDIST</th><th>ZDIST_ERR</th><th>NSAID</th><th>NMGY</th><th>NMGY_IVAR</th><th>OK</th><th>RNMGY</th><th>ABSMAG</th><th>AMIVAR</th><th>EXTINCTION</th><th>KCORRECT</th><th>KCOEFF</th><th>MTOL</th><th>B300</th><th>B1000</th><th>METS</th><th>MASS</th><th>XCEN</th><th>YCEN</th><th>NPROF</th><th>PROFMEAN</th><th>PROFMEAN_IVAR</th><th>QSTOKES</th><th>USTOKES</th><th>BASTOKES</th><th>PHISTOKES</th><th>PETROFLUX</th><th>PETROFLUX_IVAR</th><th>FIBERFLUX</th><th>FIBERFLUX_IVAR</th><th>BA50</th><th>PHI50</th><th>BA90</th><th>PHI90</th><th>SERSICFLUX</th><th>SERSICFLUX_IVAR</th><th>SERSIC_N</th><th>SERSIC_BA</th><th>SERSIC_PHI</th><th>ASYMMETRY</th><th>CLUMPY</th><th>DFLAGS</th><th>AID</th><th>PID</th><th>DVERSION</th><th>PROFTHETA</th><th>PETROTHETA</th><th>PETROTH50</th><th>PETROTH90</th><th>SERSIC_TH50</th><th>OBJNO</th><th>PLATE</th><th>FIBERID</th><th>MJD</th><th>COEFF</th><th>VDISP</th><th>D4000</th><th>D4000ERR</th><th>FA</th><th>FAERR</th><th>S2FLUX</th><th>S2FLUXERR</th><th>S2EW</th><th>S2EWERR</th><th>S2VMEAS</th><th>S2VMERR</th><th>S2RATIO</th><th>HAFLUX</th><th>HAFLUXERR</th><th>HAEW</th><th>HAEWERR</th><th>HAVMEAS</th><th>HAVMERR</th><th>N2FLUX</th><th>N2FLUXERR</th><th>N2EW</th><th>N2EWERR</th><th>N2VMEAS</th><th>N2VMERR</th><th>HBFLUX</th><th>HBFLUXERR</th><th>HBEW</th><th>HBEWERR</th><th>HBVMEAS</th><th>HBVMERR</th><th>O1FLUX</th><th>O1FLUXERR</th><th>O1EW</th><th>O1EWERR</th><th>O1VMEAS</th><th>O1VMERR</th><th>O2FLUX</th><th>O2FLUXERR</th><th>O2EW</th><th>O2EWERR</th><th>O2VMEAS</th><th>O2VMERR</th><th>O3FLUX</th><th>O3FLUXERR</th><th>O3EW</th><th>O3EWERR</th><th>O3VMEAS</th><th>O3VMERR</th><th>AHGEW</th><th>AHGEWERR</th><th>AHDEW</th><th>AHDEWERR</th><th>NE3EW</th><th>NE3EWERR</th><th>NE5EW</th><th>NE5EWERR</th><th>AV</th><th>S2NSAMP</th><th>RACAT</th><th>DECCAT</th><th>ZSDSSLINE</th><th>SURVEY</th><th>PROGRAMNAME</th><th>PLATEQUALITY</th><th>TILE</th><th>PLUG_RA</th><th>PLUG_DEC</th></tr></thead>
+<thead><tr><th>bytes19</th><th>bytes27</th><th>float64</th><th>float64</th><th>int32</th><th>int32</th><th>int32</th><th>int32</th><th>int32</th><th>int32</th><th>float32</th><th>float32</th><th>bytes7</th><th>float32</th><th>int16</th><th>uint8</th><th>int16</th><th>bytes3</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>int32</th><th>float32[7]</th><th>float32[7]</th><th>int16</th><th>float32[7]</th><th>float32[7]</th><th>float32[7]</th><th>float32[7]</th><th>float32[7]</th><th>float32[5]</th><th>float32[7]</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float64</th><th>float64</th><th>float32[7]</th><th>float32[15,7]</th><th>float32[15,7]</th><th>float32[15,7]</th><th>float32[15,7]</th><th>float32[15,7]</th><th>float32[15,7]</th><th>float32[7]</th><th>float32[7]</th><th>float32[7]</th><th>float32[7]</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32[7]</th><th>float32[7]</th><th>float32</th><th>float32</th><th>float32</th><th>float32[7]</th><th>float32[7]</th><th>int32[7]</th><th>int32</th><th>int32</th><th>bytes8</th><th>float32[15]</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>int32</th><th>int32</th><th>int32</th><th>int32</th><th>float32[7]</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float64</th><th>float64</th><th>float32</th><th>bytes6</th><th>bytes23</th><th>bytes8</th><th>int32</th><th>float64</th><th>float64</th></tr></thead>
+<tr><td>J094651.40-010228.5</td><td>09h/m00/J094651.40-010228.5</td><td>146.71420878660933</td><td>-1.0412815695754145</td><td>0</td><td>72212</td><td>21157</td><td>-1</td><td>-1</td><td>-1</td><td>15.178774</td><td>0.021222278</td><td>sdss</td><td>0.07</td><td>756</td><td>1</td><td>206</td><td>301</td><td>136.29353</td><td>1095.152</td><td>0.020597626</td><td>0.020687785</td><td>0.00044536332</td><td>0</td><td>29.552263 .. 3251.03</td><td>0.30069932 .. 0.00012297294</td><td>1</td><td>31.202734 .. 3454.6162</td><td>-15.1673565 .. -20.296247</td><td>222.77438 .. 1102.5615</td><td>0.4536473 .. 0.080934174</td><td>-0.006074993 .. 0.019238615</td><td>0.00017146798 .. 2.5712407e-12</td><td>0.00020710815 .. 0.99210894</td><td>2.7482898e-05</td><td>0.30352896</td><td>0.034775626</td><td>8815395000.0</td><td>203.33877563476562</td><td>266.452880859375</td><td>0.3149959 .. 22.908411</td><td>0.3149959 .. 0.0</td><td>233.37904 .. 0.0</td><td>0.06221572 .. -0.057742715</td><td>0.00061461644 .. -0.13205947</td><td>0.88285136 .. 0.7480506</td><td>0.28299746 .. -56.808624</td><td>18.20807 .. 2266.657</td><td>1.9946122 .. 0.015632946</td><td>1.0260136 .. 563.82434</td><td>47.339676 .. 0.3339262</td><td>0.8845921</td><td>15.40155</td><td>0.8016074</td><td>17.53331</td><td>19.459507 .. 3130.742</td><td>1.0776075 .. 0.01723353</td><td>4.7782097</td><td>0.6645174</td><td>16.040314</td><td>-0.035117492 .. 0.007748138</td><td>0.05221656 .. 0.059254237</td><td>0 .. 0</td><td>0</td><td>30</td><td>v2_1_5</td><td>0.22341923 .. 258.39</td><td>7.2478933</td><td>3.4641922</td><td>10.453795</td><td>5.845999</td><td>26600130</td><td>266</td><td>1</td><td>51630</td><td>4.1058846 .. 1.12e-43</td><td>131.86357</td><td>1.6750895</td><td>0.01734476</td><td>0.086800694</td><td>0.0124226315</td><td>269.2588</td><td>17.046213</td><td>2.474215</td><td>0.23574898</td><td>123.141365</td><td>7.7632475</td><td>0.68473977</td><td>584.5531</td><td>13.858368</td><td>5.2918415</td><td>0.2084552</td><td>141.25987</td><td>5.8739424</td><td>294.05807</td><td>13.240504</td><td>2.6620486</td><td>0.16082057</td><td>128.46378</td><td>9.59668</td><td>147.91853</td><td>15.076868</td><td>1.5249467</td><td>0.12158316</td><td>122.40449</td><td>14.56363</td><td>22.092758</td><td>12.022614</td><td>0.20646292</td><td>0.13632269</td><td>103.73506</td><td>30.22204</td><td>-9999.0</td><td>-9999.0</td><td>-9999.0</td><td>-9999.0</td><td>-9999.0</td><td>-9999.0</td><td>112.33277</td><td>12.699974</td><td>1.195764</td><td>0.17837653</td><td>125.590454</td><td>9.01761</td><td>4.145629</td><td>0.39556292</td><td>-0.8991989</td><td>0.43246344</td><td>0.009395278</td><td>0.5594772</td><td>-9999.0</td><td>-9999.0</td><td>0.96117455</td><td>35.6447</td><td>146.7141910489815</td><td>-1.0412763864732957</td><td>0.021222278</td><td>sdss</td><td>legacy</td><td>good</td><td>122</td><td>146.71421</td><td>-1.0413043</td></tr>
+<tr><td>J094631.60-005917.7</td><td>09h/m00/J094631.60-005917.7</td><td>146.63173520920705</td><td>-0.9883548584122686</td><td>1</td><td>72132</td><td>-1</td><td>-1</td><td>-1</td><td>-1</td><td>18.12335</td><td>0.05265425</td><td>sdss</td><td>0.07</td><td>756</td><td>1</td><td>206</td><td>301</td><td>618.0553</td><td>344.6873</td><td>0.052030597</td><td>0.052030597</td><td>0.0005003469</td><td>1</td><td>5.937189 .. 117.10686</td><td>2.7116714 .. 0.04883515</td><td>1</td><td>5.818742 .. 117.17861</td><td>-15.458004 .. -18.714317</td><td>81.08679 .. 568.131</td><td>0.43238893 .. 0.07714152</td><td>-0.025642741 .. -0.0068317885</td><td>3.529478e-11 .. 4.7585988e-07</td><td>3.0668558e-05 .. 0.8125395</td><td>0.023327291</td><td>0.06884753</td><td>0.020664403</td><td>1583589900.0</td><td>79.9375</td><td>89.643310546875</td><td>0.15526375 .. 0.8952112</td><td>0.15526375 .. 0.0</td><td>454.9598 .. 0.0</td><td>-0.006554106 .. -0.11334504</td><td>0.00026806968 .. -0.032187585</td><td>0.9869664 .. 0.789186</td><td>88.828926 .. -82.073296</td><td>3.443978 .. 137.51616</td><td>8.568999 .. 0.018935598</td><td>0.45930192 .. 31.892025</td><td>115.095764 .. 0.68445855</td><td>0.7651253</td><td>161.06845</td><td>0.59412754</td><td>162.74481</td><td>3.986808 .. 113.16854</td><td>6.9103274 .. 0.107008755</td><td>0.91950214</td><td>0.45471346</td><td>164.1058</td><td>0.018470645 .. -0.0010265708</td><td>0.32469216 .. -0.016755164</td><td>0 .. 0</td><td>0</td><td>36</td><td>v2_1_5</td><td>0.22341923 .. 258.39</td><td>4.7698913</td><td>2.2897646</td><td>5.2029705</td><td>2.8038216</td><td>26600630</td><td>266</td><td>6</td><td>51630</td><td>1.1e-44 .. 0.0008093229</td><td>41.803913</td><td>1.2417903</td><td>0.03935879</td><td>0.4228338</td><td>0.06334799</td><td>79.63688</td><td>4.6382565</td><td>10.780762</td><td>1.0136558</td><td>53.696716</td><td>3.4870718</td><td>0.84784895</td><td>158.23763</td><td>4.2205896</td><td>21.083307</td><td>1.1031191</td><td>51.533344</td><td>2.0600708</td><td>33.259502</td><td>3.634611</td><td>4.4314384</td><td>0.6746483</td><td>45.62845</td><td>6.644905</td><td>47.451176</td><td>6.3951616</td><td>4.9146857</td><td>0.5737447</td><td>56.25411</td><td>8.379909</td><td>7.674392</td><td>3.2292523</td><td>0.97784686</td><td>0.50509477</td><td>44.255222</td><td>28.346481</td><td>111.57335</td><td>13.896584</td><td>15.15305</td><td>3.610634</td><td>45.99403</td><td>9.92913</td><td>40.89481</td><td>5.2624846</td><td>4.2584043</td><td>0.76661664</td><td>25.959152</td><td>6.670042</td><td>-1.3966367</td><td>1.3962288</td><td>-3.96047</td><td>1.4181765</td><td>3.0781476</td><td>1.7761708</td><td>-9999.0</td><td>-9999.0</td><td>0.46189722</td><td>7.586127</td><td>146.6316733254659</td><td>-0.9882606225727443</td><td>0.05265425</td><td>sdss</td><td>legacy</td><td>good</td><td>122</td><td>146.63167</td><td>-0.98827781</td></tr>
+</table></div></div></div>
+</div>
+<p>As we can see, the <code class="docutils literal notranslate"><span class="pre">Table</span></code> read method has parsed that record array and created something similar to the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> display we saw above; column headers with names, and a cleaner interface for viewing the data. We can now filter, if needed. Let’a find all sources within a narrow redshift (<span class="math notranslate nohighlight">\(z\)</span>) range.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered</span> <span class="o">=</span> <span class="n">table</span><span class="p">[(</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.02</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">0.021</span><span class="p">)]</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2070
+</pre></div>
+</div>
+</div>
+</div>
+<p>Don’t worry about the syntax of that filtering yet, if you’re unfamiliar, but an english translation might be “set the variable <code class="docutils literal notranslate"><span class="pre">filtered</span></code> to the table, indexed for rows such that the column <code class="docutils literal notranslate"><span class="pre">table['Z']</span></code> has a value greater than 0.02 and also such that the column <code class="docutils literal notranslate"><span class="pre">table['Z']</span></code> has a value less than 0.021.”</p>
+<p>You might be wondering when to use <code class="docutils literal notranslate"><span class="pre">pandas</span></code> vs <code class="docutils literal notranslate"><span class="pre">astropy.Table</span></code>s to work with your data — in truth, you can convert between them fairly easily, so whichever you are more comfortable with will ultimately be fine.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One caveat to this is that <code class="docutils literal notranslate"><span class="pre">pandas</span></code> cannot handle “cells” with multi-dimensional values, e.g., a row-column position can’t have a value of a whole array. Some astronomical tables, <em>because</em> <code class="docutils literal notranslate"><span class="pre">astropy.Tables</span></code> can handle this, will store data that way. NSA is an example. Often, however, we only need a few columns, so whichever method we use to read the data in, we can extract those columns, create our own table, and move on.</p>
+</div>
+</section>
+<section id="asdf-advanced-science-data-format">
+<h2>ASDF (Advanced Science Data Format)<a class="headerlink" href="#asdf-advanced-science-data-format" title="Permalink to this heading">#</a></h2>
+<p>One new and up-and-coming data storage option is the <code class="docutils literal notranslate"><span class="pre">asdf</span></code> format. It is convenient because it stores data in a tree-like structure that, from the outside, looks exactly like a Python dictionary. This means that when we want to take some data we’ve been working with and save it to a file, instead of trying to format everything into columns and writing an ascii file, we can simply store things by column name in a dictionary and then drop it straight into the file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asdf</span>
+<span class="kn">from</span> <span class="nn">asdf</span> <span class="kn">import</span> <span class="n">AsdfFile</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="n">AsdfFile</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">target</span><span class="o">.</span><span class="n">write_to</span><span class="p">(</span><span class="s1">&#39;target.asdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, any arrays we are working with we can name, drop into the tree dictionary, and ultimately write to the file. We can also add metadata – either directly into the tree, or into a metadata dictionary which then gets added to the tree. Opening an <code class="docutils literal notranslate"><span class="pre">asdf</span></code> file is also simple:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">asdf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;example.asdf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">af</span><span class="p">:</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">af</span><span class="o">.</span><span class="n">tree</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This \code{tree} attribute contains the dictionary we saved above, so everything pops right back out.</p>
+<p>There’s a lot more to <code class="docutils literal notranslate"><span class="pre">asdf</span></code> in terms of motivation and capability, but for our purposes at present, the important part is knowing how to pack and save, then open and unpack, data with this format.</p>
+</section>
+<section id="hdf5-hierarchical-data-format-5">
+<h2>HDF5 (Hierarchical Data Format 5)<a class="headerlink" href="#hdf5-hierarchical-data-format-5" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">hdf5</span></code> format is another new, semi-popular file standard. It structures its interior like a full file directory system, with “folders” and “files”. To deal with <code class="docutils literal notranslate"><span class="pre">hdf5</span></code> files in Python, we need to use the <code class="docutils literal notranslate"><span class="pre">h5py</span></code> package, which handles the I/O operation for us.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;example.hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> 
+<span class="n">data_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>From here, things will change depending on the file — HDF5 stores things in “datasets,” whose names will appear in that list of keys we just accessed. Assuming our example file key list had “dataset1” as one of the keys, we would then have</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset1</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;dataset1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This dataset would be an object similar to, but not exactly, a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array. This object can be indexed and sliced like a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array. For many frameworks, however, it is beneficial to extract and convert these datasets into <code class="docutils literal notranslate"><span class="pre">numpy</span></code> before continuing further.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>More on datasets can be found here: <a class="reference external" href="https://docs.h5py.org/en/stable/high/dataset.html#dataset">https://docs.h5py.org/en/stable/high/dataset.html#dataset</a></p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/bootcamp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ascii-text-files">ASCII (text files)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-have-we-learned">What have we learned?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#want-practice-with-pandas">Want practice with Pandas?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fits-flexible-image-transport-system">FITS (Flexible Image Transport System)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asdf-advanced-science-data-format">ASDF (Advanced Science Data Format)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hdf5-hierarchical-data-format-5">HDF5 (Hierarchical Data Format 5)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Imad Pasha
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
